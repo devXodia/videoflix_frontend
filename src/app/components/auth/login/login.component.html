@@ -1,5 +1,5 @@
 <section class="w-screen h-screen flex justify-center items-center">
-  <div class="w-screen h-screen absolute sepia z-[-1]">
+  <div class="w-screen h-screen absolute sepia-[.50] z-[-1]">
     <img class="w-full h-full" src="../../../../assets/images/vf_bg.png" />
   </div>
 
@@ -8,16 +8,24 @@
   </span>
 
   <div
-    class="login-container flex flex-col h-[90%] w-[50%] bg-black bg-opacity-50 items-center p-8 drop-shadow-2xl rounded-2xl"
+    class="login-container flex flex-col h-[90%] w-[35%] bg-black bg-opacity-50 items-center p-8 drop-shadow-2xl rounded-2xl"
   >
-    <h2 class="sign-in-text text-5xl text-white mt-20">Sign In</h2>
+    <h2 class="sign-in-text text-6xl text-white mt-20 font-medium">Sign In</h2>
 
     <div class="email-input p-5 w-[80%] h-[13%] mt-10">
-      <input class="rounded-md w-full h-full p-5" placeholder="Email Adress" />
+      <input
+        type="email"
+        class="rounded-md w-full h-full p-5"
+        placeholder="Email Adress"
+      />
     </div>
 
     <div class="password-input p-5 w-[80%] h-[13%] mt-10">
-      <input class="rounded-md w-full h-full p-5" placeholder="Password" />
+      <input
+        type="password"
+        class="rounded-md w-full h-full p-5"
+        placeholder="Password"
+      />
     </div>
 
     <div class="sign-button p-5 w-[80%] h-[13%] mt-5">
@@ -28,10 +36,8 @@
       </button>
     </div>
 
-    <div
-      class="seperator p-5 w-[80%] h-[13%] mt-3 flex justify-center items center"
-    >
-      <span class="text-white text-xl">OR</span>
+    <div class="seperator p-5 w-[80%] h-[13%] flex justify-center items center">
+      <span class="text-slate-400 text-xl self-center">OR</span>
     </div>
 
     <a class="text-white text-xl hover:text-slate-400" href="#"
