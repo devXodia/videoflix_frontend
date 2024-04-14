@@ -1,8 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
-import { RegisterForm } from '../interfaces/RegisterForm.interface';
 
 @Component({
   selector: 'app-register',
@@ -20,6 +19,6 @@ export class RegisterComponent {
   constructor(private http: AuthService) {}
 
   createAccount() {
-    this.http.postData(this.fullName, this.email, this.pwd1);
+    this.http.handlePostRequest(this.fullName, this.email, this.pwd1);
   }
 }

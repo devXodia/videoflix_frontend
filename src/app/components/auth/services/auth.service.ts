@@ -8,9 +8,10 @@ import { RegisterForm } from '../interfaces/RegisterForm.interface';
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  postData(fullName: string, email: string, pwd1: string) {
+  handlePostRequest(fullName: string, email: string, pwd1: string) {
     const url = 'http://127.0.0.1:8000/api/register/';
     const data: RegisterForm = {
+      username: `user${email}`,
       first_name: fullName,
       email: email,
       password: pwd1,
