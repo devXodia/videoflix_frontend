@@ -40,9 +40,9 @@
         placeholder="Email Address"
       />
       @if(this.emailTypeError){
-      <span class="text-red-700 text-lg"
-        >Please enter a valid Email Address.</span
-      >
+      <p class="text-red-700 text-lg mt-1 mx-2">
+        Please enter a valid Email Address.
+      </p>
       }
     </div>
 
@@ -53,6 +53,9 @@
         class="rounded-xl w-full h-full p-5 bg-black text-white bg-opacity-40"
         placeholder="Password"
       />
+      @if(this.pwdMatchError){
+      <p class="text-red-700 text-lg mt-1 mx-2">Your Passwords don't match.</p>
+      }
     </div>
 
     <div class="confirm-password-input p-5 w-[80%] h-[13%] mt-5">

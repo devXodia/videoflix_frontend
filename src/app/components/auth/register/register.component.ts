@@ -17,7 +17,7 @@ export class RegisterComponent {
   pwd1: string = '';
   pwd2: string = '';
   emailTypeError: boolean = false;
-  accountCreated: boolean = false;
+  accountCreated: boolean = true;
   pwdMatchError: boolean = false;
 
   constructor(private authService: AuthService) {}
@@ -43,8 +43,10 @@ export class RegisterComponent {
 
   passwordMatches() {
     if (this.pwd1 === this.pwd2) {
+      this.pwdMatchError = false;
       return true;
     } else {
+      this.pwdMatchError = true;
       return false;
     }
   }
@@ -60,6 +62,7 @@ export class RegisterComponent {
 
   showSuccessOnUI() {
     this.emailTypeError = false;
+    this.pwdMatchError = false;
     this.accountCreated = true;
   }
 }
