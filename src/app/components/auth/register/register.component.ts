@@ -16,23 +16,50 @@ export class RegisterComponent {
   email: string = '';
   pwd1: string = '';
   pwd2: string = '';
+  emailTypeError: boolean = false;
+  accountCreated: boolean = false;
+  pwdMatchError: boolean = false;
 
   constructor(private authService: AuthService) {}
 
   registerUser() {
-    if (this.pwd1 === this.pwd2) {
+    if (this.passwordMatches()) {
       this.authService
         .registerUser(this.fullName, this.email, this.pwd1)
         .subscribe({
           next: (response) => {
             console.log(response);
+            this.showSuccessOnUI();
           },
           error: (err: HttpErrorResponse) => {
             console.error(err);
+            this.checkTypeError();
           },
         });
     } else {
-      console.error("Passwords don't match.");
+      this.pwdMatchError = true;
     }
+  }
+
+  passwordMatches() {
+    if (this.pwd1 === this.pwd2) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  checkTypeError() {
+    if (!this.email.includes('@')) {
+      this.emailTypeError = true;
+    } else {
+      this.emailTypeError = false;
+    }
+    this.accountCreated = false;
+  }
+
+  showSuccessOnUI() {
+    this.emailTypeError = false;
+    this.accountCreated = true;
   }
 }
