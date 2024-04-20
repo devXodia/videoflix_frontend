@@ -43,6 +43,10 @@
       <p class="text-red-700 text-lg mt-1 mx-2">
         Please enter a valid Email Address.
       </p>
+      } @else if(!this.emailTypeError && this.userExistsError){
+      <p class="text-red-700 text-lg mt-1 mx-2">
+        Email Address already exists.
+      </p>
       }
     </div>
 
@@ -68,21 +72,13 @@
     </div>
 
     <div class="reset-button p-5 w-[80%] h-[13%] mt-5">
-      @if(!this.accountCreated){
       <button
         (click)="registerUser()"
+        [@register]="showAnimation ? 'registered' : 'unregistered'"
         class="p-2 bg-red-700 font-medium text-lg text-white h-full w-full rounded-xl hover:bg-red-500"
       >
-        Create Account!
+        {{ showAnimation ? "Account Created!" : "Create Account!" }}
       </button>
-      } @else {
-      <button
-        routerLink="/"
-        class="p-2 bg-green-700 font-medium text-lg text-white h-full w-full rounded-xl hover:bg-green-500"
-      >
-        Account Created!
-      </button>
-      }
     </div>
   </div>
 </section>

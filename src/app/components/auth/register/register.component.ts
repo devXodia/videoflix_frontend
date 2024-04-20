@@ -3,13 +3,39 @@ import { RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
-
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 @Component({
   selector: 'app-register',
   standalone: true,
   imports: [RouterModule, FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
+  animations: [
+    trigger('register', [
+      state(
+        'unregistered',
+        style({
+          backgroundColor: 'rgb(185, 28, 28)',
+          transform: 'scale(1.0)',
+        })
+      ),
+      state(
+        'registered',
+        style({
+          backgroundColor: 'rgb(21, 128, 61)',
+          opacity: '1',
+          transform: 'scale(1.2)',
+        })
+      ),
+      transition('unregistered => registered', [animate('0.15s ease-in-out')]),
+    ]),
+  ],
 })
 export class RegisterComponent {
   fullName: string = '';
@@ -17,8 +43,9 @@ export class RegisterComponent {
   pwd1: string = '';
   pwd2: string = '';
   emailTypeError: boolean = false;
-  accountCreated: boolean = true;
   pwdMatchError: boolean = false;
+  showAnimation: boolean = false;
+  userExistsError: boolean = false;
 
   constructor(private authService: AuthService) {}
 
@@ -28,12 +55,10 @@ export class RegisterComponent {
         .registerUser(this.fullName, this.email, this.pwd1)
         .subscribe({
           next: (response) => {
-            console.log(response);
             this.showSuccessOnUI();
           },
           error: (err: HttpErrorResponse) => {
-            console.error(err);
-            this.checkTypeError();
+            this.checkTypeError(err);
           },
         });
     } else {
@@ -51,18 +76,22 @@ export class RegisterComponent {
     }
   }
 
-  checkTypeError() {
+  checkTypeError(err: HttpErrorResponse) {
     if (!this.email.includes('@')) {
       this.emailTypeError = true;
-    } else {
+    } else if (
+      this.email.includes('@') &&
+      err.error.email[0] === 'user with this email already exists.'
+    ) {
       this.emailTypeError = false;
+      this.userExistsError = true;
     }
-    this.accountCreated = false;
   }
 
   showSuccessOnUI() {
     this.emailTypeError = false;
     this.pwdMatchError = false;
-    this.accountCreated = true;
+    this.userExistsError = false;
+    this.showAnimation = true;
   }
 }
