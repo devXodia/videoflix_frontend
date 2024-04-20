@@ -51,7 +51,6 @@ export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
   registerUser() {
-    console.log('run');
     if (this.passwordMatches()) {
       this.authService
         .registerUser(this.fullName, this.email, this.pwd1)
