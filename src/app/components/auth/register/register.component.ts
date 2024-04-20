@@ -34,6 +34,7 @@ import {
         })
       ),
       transition('unregistered => registered', [animate('0.15s ease-in-out')]),
+      transition('registered => unregistered', [animate('0.1s ease-in-out')]),
     ]),
   ],
 })
@@ -50,12 +51,14 @@ export class RegisterComponent {
   constructor(private authService: AuthService) {}
 
   registerUser() {
+    console.log('run');
     if (this.passwordMatches()) {
       this.authService
         .registerUser(this.fullName, this.email, this.pwd1)
         .subscribe({
           next: (response) => {
             this.showSuccessOnUI();
+            this.resetUI();
           },
           error: (err: HttpErrorResponse) => {
             this.checkTypeError(err);
@@ -93,5 +96,22 @@ export class RegisterComponent {
     this.pwdMatchError = false;
     this.userExistsError = false;
     this.showAnimation = true;
+  }
+
+  resetUI() {
+    setTimeout(() => {
+      this.emailTypeError = false;
+      this.pwdMatchError = false;
+      this.userExistsError = false;
+      this.email = '';
+      this.fullName = '';
+      this.pwd1 = '';
+      this.pwd2 = '';
+      this.showAnimation = false;
+    }, 8000);
+  }
+
+  ngOnDestroy() {
+    this.resetUI();
   }
 }
