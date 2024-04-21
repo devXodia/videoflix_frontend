@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
@@ -16,27 +16,6 @@ import {
   imports: [RouterModule, FormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',
-  animations: [
-    trigger('register', [
-      state(
-        'unregistered',
-        style({
-          backgroundColor: 'rgb(185, 28, 28)',
-          transform: 'scale(1.0)',
-        })
-      ),
-      state(
-        'registered',
-        style({
-          backgroundColor: 'rgb(21, 128, 61)',
-          opacity: '1',
-          transform: 'scale(1.2)',
-        })
-      ),
-      transition('unregistered => registered', [animate('0.15s ease-in-out')]),
-      transition('registered => unregistered', [animate('0.1s ease-in-out')]),
-    ]),
-  ],
 })
 export class RegisterComponent {
   fullName: string = '';
@@ -45,10 +24,13 @@ export class RegisterComponent {
   pwd2: string = '';
   emailTypeError: boolean = false;
   pwdMatchError: boolean = false;
-  showAnimation: boolean = false;
-  userExistsError: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  userExistsError: boolean = false;
+  accountCreationMode: boolean = true;
+  accountCreationSuccess: boolean = false;
+  accountCreated: boolean = false;
+
+  constructor(private authService: AuthService, private router: Router) {}
 
   registerUser() {
     if (this.passwordMatches()) {
@@ -57,7 +39,6 @@ export class RegisterComponent {
         .subscribe({
           next: (response) => {
             this.showSuccessOnUI();
-            this.resetUI();
           },
           error: (err: HttpErrorResponse) => {
             this.checkTypeError(err);
@@ -91,26 +72,24 @@ export class RegisterComponent {
   }
 
   showSuccessOnUI() {
+    this.switchAccountCreationToSuccess();
+    this.showAccountCreated();
+  }
+
+  showAccountCreated() {
+    setTimeout(() => {
+      this.accountCreationSuccess = false;
+    }, 5000);
+    this.accountCreated = true;
+  }
+
+  switchAccountCreationToSuccess() {
     this.emailTypeError = false;
     this.pwdMatchError = false;
     this.userExistsError = false;
-    this.showAnimation = true;
+    this.accountCreationMode = false;
+    this.accountCreationSuccess = true;
   }
 
-  resetUI() {
-    setTimeout(() => {
-      this.emailTypeError = false;
-      this.pwdMatchError = false;
-      this.userExistsError = false;
-      this.email = '';
-      this.fullName = '';
-      this.pwd1 = '';
-      this.pwd2 = '';
-      this.showAnimation = false;
-    }, 8000);
-  }
-
-  ngOnDestroy() {
-    this.resetUI();
-  }
+  ngOnDestroy() {}
 }

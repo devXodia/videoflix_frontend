@@ -11,9 +11,9 @@ import { RouterModule } from '@angular/router';
 export class VerifyEmailComponent {
   verifySuccess: boolean = false;
   verifyError: boolean = false;
-  loading: boolean = false;
+  loading: boolean = true;
 
-  /*   success() {
+  success() {
     this.loading = false;
     this.verifySuccess = true;
   }
@@ -27,5 +27,5 @@ export class VerifyEmailComponent {
     this.verifyError = false;
     this.verifySuccess = false;
     this.loading = true;
-  } */
+  }
 }
