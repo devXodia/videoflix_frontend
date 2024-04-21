@@ -20,18 +20,33 @@
     <h2
       class="sign-in-text text-center text-4xl text-white mt-40 font-medium w-[80%]"
     >
-      {{ loading ? "Verifying your Email..." : "Your Account is verified!" }}
+      @if(loading){ Verifiying your Email... } @else if(!loading &&
+      verifySuccess){ Your Account is verified! } @else { We could'nt verify
+      your email. }
     </h2>
 
     @if(loading){
     <div class="spinner mt-20"></div>
-    } @else{
+    } @else if(verifySuccess){
     <img class="mt-20" src="../../../../assets/images/check.png" />
     <h3 class="text-xl text-white text-center mt-20 font-medium w-[80%]">
       You are going to be redirected to the Homepage in 3 Seconds...
     </h3>
+    } @else {
+    <img class="mt-20" src="../../../../assets/images/error.png" />
+    <h3 class="text-xl text-white text-center mt-20 font-medium w-[80%]">
+      Please contact the Site Administrator for further assistance!
+    </h3>
     }
 
-    <button class="w-20 h-10 bg-white mt-20" (click)="switchMe()">TEST</button>
+    <!--  <div class="flex justify-center items-center gap-5">
+      <button class="w-20 h-10 bg-white mt-20" (click)="success()">
+        Success
+      </button>
+      <button class="w-20 h-10 bg-white mt-20" (click)="error()">Error</button>
+      <button class="w-20 h-10 bg-white mt-20" (click)="loadingState()">
+        Loading..
+      </button>
+    </div> -->
   </div>
 </section>

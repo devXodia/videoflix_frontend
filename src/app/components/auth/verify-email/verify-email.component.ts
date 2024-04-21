@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-verify-email',
   standalone: true,
-  imports: [],
+  imports: [RouterModule],
   templateUrl: './verify-email.component.html',
   styleUrl: './verify-email.component.scss',
 })
@@ -12,7 +13,19 @@ export class VerifyEmailComponent {
   verifyError: boolean = false;
   loading: boolean = false;
 
-  switchMe() {
-    this.loading = !this.loading;
+  /*   success() {
+    this.loading = false;
+    this.verifySuccess = true;
   }
+
+  error() {
+    this.verifySuccess = false;
+    this.loading = false;
+  }
+
+  loadingState() {
+    this.verifyError = false;
+    this.verifySuccess = false;
+    this.loading = true;
+  } */
 }
