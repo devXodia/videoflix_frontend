@@ -10,4 +10,9 @@ import { Component } from '@angular/core';
 export class VerifyEmailComponent {
   verifySuccess: boolean = false;
   verifyError: boolean = false;
+  loading: boolean = false;
+
+  switchMe() {
+    this.loading = !this.loading;
+  }
 }

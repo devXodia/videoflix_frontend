@@ -18,9 +18,20 @@
     </div>
 
     <h2
-      class="sign-in-text text-center text-4xl text-white mt-20 font-medium w-[80%]"
+      class="sign-in-text text-center text-4xl text-white mt-40 font-medium w-[80%]"
     >
-      Verifying your Email...
+      {{ loading ? "Verifying your Email..." : "Your Account is verified!" }}
     </h2>
+
+    @if(loading){
+    <div class="spinner mt-20"></div>
+    } @else{
+    <img class="mt-20" src="../../../../assets/images/check.png" />
+    <h3 class="text-xl text-white text-center mt-20 font-medium w-[80%]">
+      You are going to be redirected to the Homepage in 3 Seconds...
+    </h3>
+    }
+
+    <button class="w-20 h-10 bg-white mt-20" (click)="switchMe()">TEST</button>
   </div>
 </section>
