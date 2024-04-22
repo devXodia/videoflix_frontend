@@ -10,32 +10,32 @@
   <div
     class="reset-container flex flex-col h-[90%] w-[35%] bg-black bg-opacity-50 items-center p-8 drop-shadow-2xl rounded-2xl relative"
   >
-    @if(accountCreationMode || accountCreated && !creatingAccountMode ){
+    @if(showRegisterForm || accountCreated && !creatingAccountAnimation ){
     <div
       routerLink="/"
       class="arrow-container w-10 h-10 bg-white rounded-full absolute left-10 top-10 flex justify-center items-center cursor-pointer hover:bg-slate-200"
     >
       <img class="w-1/2 h-1/2" src="../../../../assets/images/left-arrow.png" />
     </div>
-    } @if(accountCreationMode && !creatingAccountMode && !accountCreated){
+    } @if(showRegisterForm && !creatingAccountAnimation && !accountCreated){
     <h2
       class="sign-in-text text-center text-4xl text-white mt-20 font-medium w-[80%]"
     >
       Create Your Videoflix Account!
     </h2>
-    } @else if(creatingAccountMode && !accountCreationMode){
+    } @else if(creatingAccountAnimation && !showRegisterForm){
     <h2
       class="sign-in-text text-center text-4xl text-white mt-40 font-medium w-[80%]"
     >
       Creating your Account...
     </h2>
-    } @else if(!accountCreationMode && accountCreated){
+    } @else if(!showRegisterForm && accountCreated){
     <h2
       class="sign-in-text text-center text-4xl text-white mt-40 font-medium w-[80%]"
     >
       Your Account is created!
     </h2>
-    } @if(accountCreationMode && !accountCreated && !creatingAccountMode){
+    } @if(showRegisterForm && !accountCreated && !creatingAccountAnimation){
 
     <div class="name-input p-5 w-[80%] h-[13%] mt-10">
       <input
@@ -87,14 +87,14 @@
 
     <div class="reset-button p-5 w-[80%] h-[13%] mt-5">
       <button
-        [disabled]="creatingAccountMode"
+        [disabled]="creatingAccountAnimation"
         (click)="registerUser()"
         class="p-2 bg-red-700 font-medium text-lg text-white h-full w-full rounded-xl hover:bg-red-500"
       >
         Create Account!
       </button>
     </div>
-    } @else if(creatingAccountMode && !accountCreationMode){
+    } @else if(creatingAccountAnimation && !showRegisterForm){
     <div class="spinner mt-20"></div>
     } @else if(accountCreated){
     <img class="mt-20" src="../../../../assets/images/check.png" />
