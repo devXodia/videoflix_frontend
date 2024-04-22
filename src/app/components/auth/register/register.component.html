@@ -10,14 +10,14 @@
   <div
     class="reset-container flex flex-col h-[90%] w-[35%] bg-black bg-opacity-50 items-center p-8 drop-shadow-2xl rounded-2xl relative"
   >
+    @if(accountCreationMode || accountCreated && !accountCreationSuccess ){
     <div
       routerLink="/"
       class="arrow-container w-10 h-10 bg-white rounded-full absolute left-10 top-10 flex justify-center items-center cursor-pointer hover:bg-slate-200"
     >
       <img class="w-1/2 h-1/2" src="../../../../assets/images/left-arrow.png" />
     </div>
-
-    @if(accountCreationMode && !accountCreationSuccess && !accountCreated){
+    } @if(accountCreationMode && !accountCreationSuccess && !accountCreated){
     <h2
       class="sign-in-text text-center text-4xl text-white mt-20 font-medium w-[80%]"
     >
