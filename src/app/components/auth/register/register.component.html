@@ -10,20 +10,20 @@
   <div
     class="reset-container flex flex-col h-[90%] w-[35%] bg-black bg-opacity-50 items-center p-8 drop-shadow-2xl rounded-2xl relative"
   >
-    @if(accountCreationMode || accountCreated && !accountCreationSuccess ){
+    @if(accountCreationMode || accountCreated && !creatingAccountMode ){
     <div
       routerLink="/"
       class="arrow-container w-10 h-10 bg-white rounded-full absolute left-10 top-10 flex justify-center items-center cursor-pointer hover:bg-slate-200"
     >
       <img class="w-1/2 h-1/2" src="../../../../assets/images/left-arrow.png" />
     </div>
-    } @if(accountCreationMode && !accountCreationSuccess && !accountCreated){
+    } @if(accountCreationMode && !creatingAccountMode && !accountCreated){
     <h2
       class="sign-in-text text-center text-4xl text-white mt-20 font-medium w-[80%]"
     >
       Create Your Videoflix Account!
     </h2>
-    } @else if(accountCreationSuccess && !accountCreationMode){
+    } @else if(creatingAccountMode && !accountCreationMode){
     <h2
       class="sign-in-text text-center text-4xl text-white mt-40 font-medium w-[80%]"
     >
@@ -35,7 +35,7 @@
     >
       Your Account is created!
     </h2>
-    } @if(accountCreationMode && !accountCreated && !accountCreationSuccess){
+    } @if(accountCreationMode && !accountCreated && !creatingAccountMode){
 
     <div class="name-input p-5 w-[80%] h-[13%] mt-10">
       <input
@@ -87,14 +87,14 @@
 
     <div class="reset-button p-5 w-[80%] h-[13%] mt-5">
       <button
-        [disabled]="accountCreationSuccess"
+        [disabled]="creatingAccountMode"
         (click)="registerUser()"
         class="p-2 bg-red-700 font-medium text-lg text-white h-full w-full rounded-xl hover:bg-red-500"
       >
         Create Account!
       </button>
     </div>
-    } @else if(accountCreationSuccess && !accountCreationMode){
+    } @else if(creatingAccountMode && !accountCreationMode){
     <div class="spinner mt-20"></div>
     } @else if(accountCreated){
     <img class="mt-20" src="../../../../assets/images/check.png" />

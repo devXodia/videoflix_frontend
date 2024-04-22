@@ -27,7 +27,7 @@ export class RegisterComponent {
 
   userExistsError: boolean = false;
   accountCreationMode: boolean = true;
-  accountCreationSuccess: boolean = false;
+  creatingAccountMode: boolean = false;
   accountCreated: boolean = false;
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -78,7 +78,7 @@ export class RegisterComponent {
 
   showAccountCreated() {
     setTimeout(() => {
-      this.accountCreationSuccess = false;
+      this.creatingAccountMode = false;
     }, 5000);
     this.accountCreated = true;
   }
@@ -88,7 +88,7 @@ export class RegisterComponent {
     this.pwdMatchError = false;
     this.userExistsError = false;
     this.accountCreationMode = false;
-    this.accountCreationSuccess = true;
+    this.creatingAccountMode = true;
   }
 
   ngOnDestroy() {}
