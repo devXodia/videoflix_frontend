@@ -39,6 +39,7 @@ export class RegisterComponent {
         .subscribe({
           next: (response) => {
             this.showSuccessOnUI();
+            console.log(response);
           },
           error: (err: HttpErrorResponse) => {
             this.checkTypeError(err);
