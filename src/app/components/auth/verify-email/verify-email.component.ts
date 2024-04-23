@@ -50,14 +50,10 @@ export class VerifyEmailComponent {
   }
 
   showError() {
-    this.verifySuccess = false;
-    this.loading = false;
-  }
-
-  loadingState() {
-    this.verifyError = false;
-    this.verifySuccess = false;
-    this.loading = true;
+    setTimeout(() => {
+      this.verifySuccess = false;
+      this.loading = false;
+    }, 2000);
   }
 
   redirectToHome() {
