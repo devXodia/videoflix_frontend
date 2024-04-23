@@ -14,7 +14,7 @@ export class AuthService {
 
   registerUser(fullName: string, email: string, pwd1: string): Observable<any> {
     const data: RegisterForm = {
-      username: `user${email}`,
+      username: `user-${email}`,
       first_name: fullName,
       email: email,
       password: pwd1,
