@@ -10,6 +10,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
+import { DjangoResponse } from '../interfaces/DjangoResponse.interface';
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -37,7 +38,7 @@ export class RegisterComponent {
       this.authService
         .registerUser(this.fullName, this.email, this.pwd1)
         .subscribe({
-          next: (response) => {
+          next: (response: DjangoResponse) => {
             this.showSuccessOnUI();
             console.log(response);
           },

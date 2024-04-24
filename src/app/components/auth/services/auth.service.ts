@@ -16,7 +16,7 @@ export class AuthService {
   userToken: string = '';
   private registerUrl = 'http://127.0.0.1:8000/api/register/';
   private verifyUrl = `http://127.0.0.1:8000/verify-email/`;
-  private loginUrl = 'http://126.0.0.1:8000/login';
+  private loginUrl = 'http://127.0.0.1:8000/login';
 
   registerUser(fullName: string, email: string, pwd1: string): Observable<any> {
     const data: RegisterForm = {
