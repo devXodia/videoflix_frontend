@@ -42,10 +42,10 @@ showSuccessOnUi(){
 }
 
 switchToLoading(){
-  setTimeout( () => {
+  
     this.showForm = false;
     this.showLoading = true
-  }, 2500)
+
 }
 
 switchToLinkSent(){

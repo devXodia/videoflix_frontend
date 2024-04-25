@@ -7,6 +7,7 @@ import { Observable, throwError } from 'rxjs';
 import { LoginForm } from '../interfaces/LoginForm.interface';
 import { DjangoResponse } from '../interfaces/DjangoResponse.interface';
 import { PasswordResetMail } from '../interfaces/PasswordResetMail.interface';
+import { PasswordReset } from '../interfaces/PasswordReset.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,7 @@ export class AuthService {
   private verifyUrl = `http://127.0.0.1:8000/verify-email/`;
   private loginUrl = 'http://127.0.0.1:8000/login';
   private passwordResetUrl = 'http://127.0.0.1:8000/password-reset'
+  private setPasswordUrl = 'http://127.0.0.1:8000/set-password'
 
   registerUser(fullName: string, email: string, pwd1: string): Observable<any> {
     const data: RegisterForm = {
@@ -54,5 +56,14 @@ export class AuthService {
     };
 
     return this.http.post<DjangoResponse>(this.passwordResetUrl, data);
+  }
+
+  setNewPassword(token: string, password: string){
+    const data: PasswordReset = {
+      token: token,
+      password: password
+    }
+
+    return this.http.post<DjangoResponse>(this.setPasswordUrl, data)
   }
 }
