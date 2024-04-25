@@ -8,4 +8,12 @@ import { RouterModule } from '@angular/router';
   templateUrl: './password-reset.component.html',
   styleUrl: './password-reset.component.scss',
 })
-export class PasswordResetComponent {}
+export class PasswordResetComponent {
+
+showForm: boolean = false;
+showLoading: boolean = false;
+showLinkSent: boolean = true;
+
+
+}
+
