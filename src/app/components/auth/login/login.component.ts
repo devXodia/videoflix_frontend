@@ -19,7 +19,7 @@ export class LoginComponent {
   constructor(private auth: AuthService) {}
 
   loginUser() {
-    this.auth.login_user(this.email, this.password).subscribe({
+    this.auth.loginUser(this.email, this.password).subscribe({
       next: (resp: DjangoResponse) => {
         console.log('this is my repsonse: ', resp);
       },

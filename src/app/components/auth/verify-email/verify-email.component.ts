@@ -33,7 +33,7 @@ export class VerifyEmailComponent {
   }
 
   verifyUser() {
-    this.auth.verify_user(this.userToken).subscribe({
+    this.auth.verifyUser(this.userToken).subscribe({
       next: (resp: DjangoResponse) => {
         this.showSuccess();
         this.redirectToHome();
