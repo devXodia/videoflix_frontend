@@ -15,6 +15,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class LoginComponent {
   email: string = '';
   password: string = '';
+  mailTypeError: boolean = false;
+  generalError: boolean = false;
 
   constructor(private auth: AuthService) {}
 
@@ -24,8 +26,19 @@ export class LoginComponent {
         console.log('this is my repsonse: ', resp);
       },
       error: (err: HttpErrorResponse) => {
-        console.error('this is my error: ', err);
+        this.checkError();
       },
     });
+  }
+
+
+  checkError(){
+    if(!this.email.includes('@')){
+      this.mailTypeError = true;
+    }
+    else{
+      this.mailTypeError = false;
+      this.generalError = true;
+    }
   }
 }
