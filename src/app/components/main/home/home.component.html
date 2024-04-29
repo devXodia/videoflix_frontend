@@ -19,27 +19,29 @@
 
 <section class="w-full h-screen flex justify-center items-center bg-[#141414]
 ">
-    <div class="bg-slate-800 w-full h-full flex justify-center items-center">
-        <div class="border-2 w-full h-full flex justify-center items-center">
-        <span class="text-white text-5xl">Video Preview</span>
+    <div class="bg-slate-800 w-full h-full flex justify-center items-center overflow-hidden">
+        <div class="w-full h-full flex justify-center items-center ">
+            <video autoplay loop class="min-w-screen min-h-screen" src="../../../../assets/test_videos/28707-371213524_small.mp4"></video>
     </div>
 
-    <div class="w-full flex flex-col self-end h-[30%] absolute gap-2">
+    <div class="w-full flex flex-col bottom-4 h-[30%] absolute gap-2 ">
         <span class="text-white text-xl p-3 px-5 ">Watch List:</span>
        
 
         <div class="relative flex h-full w-full">
-
             
-        <div #movieListContainer class="movie-list flex gap-3 h-full w-full overflow-hidden ">
+        <div #movieListContainer class="movie-list flex gap-4 h-full w-full overflow-hidden ">
 
-         @for(movie of movieList; track movie.imgSrc){
-            <app-movie-card>
-                <img movieCardImage class="w-full h-full" src="{{ movie.imgSrc }}">
+         @for(movie of movieList; track $index;){
+            
+            
+            <app-movie-card customClass=""
+            >
+                 
+                <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.imgSrc }}">
             </app-movie-card>
          }
 
-            
         </div>
 
         <div (click)="scrollLeft()" class="arrow-left absolute left-0 w-[3%] h-full flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 cursor-pointer">

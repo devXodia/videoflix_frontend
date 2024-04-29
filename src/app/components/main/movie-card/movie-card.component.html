@@ -1,6 +1,8 @@
 
-<div class="movie min-w-[350px] max-w-[300px] flex bg-white h-full justify-center items-center hover:cursor-pointer hover: scale-100">
+<div [class]="customClass"  class="rounded-md min-w-[350px] hover:rounded-md hover:mx-16 max-w-[450px] max-h-[200px] flex bg-white h-full scale-100 justify-center items-center hover:cursor-pointer hover:scale-125 transition-all ease-in ">
     <ng-content select="[movieCardImage]">
     
     </ng-content>
+
+  
 </div>

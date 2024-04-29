@@ -11,7 +11,6 @@ import { Movie } from '../../interfaces/MovieData.interface';
 })
 export class HomeComponent {
   @ViewChild('movieListContainer') movieListContainer!: ElementRef<HTMLDivElement>;
-
   scrollAmount: number = 800;
   movieList: Movie[] = [
     {
@@ -28,7 +27,43 @@ export class HomeComponent {
       movieName: 'Halloween',
       releaseDate: '2001-02-23',
       imgSrc: '../../../../assets/test_images/tree-736885_1280.jpg' 
-    }
+    },
+    {
+      movieName: 'Halloween',
+      releaseDate: '2001-02-23',
+      imgSrc: '../../../../assets/test_images/flowers-276014_1280.jpg' 
+    },
+    {
+      movieName: 'Halloween',
+      releaseDate: '2001-02-23',
+      imgSrc: '../../../../assets/test_images/polynesia-3021072_640.jpg' 
+    },
+    {
+      movieName: 'Halloween',
+      releaseDate: '2001-02-23',
+      imgSrc: '../../../../assets/test_images/tree-736885_1280.jpg' 
+    },
+    {
+      movieName: 'Halloween',
+      releaseDate: '2001-02-23',
+      imgSrc: '../../../../assets/test_images/flowers-276014_1280.jpg' 
+    },
+  
+    {
+      movieName: 'Halloween',
+      releaseDate: '2001-02-23',
+      imgSrc: '../../../../assets/test_images/polynesia-3021072_640.jpg' 
+    },
+    {
+      movieName: 'Halloween',
+      releaseDate: '2001-02-23',
+      imgSrc: '../../../../assets/test_images/tree-736885_1280.jpg' 
+    },
+    {
+      movieName: 'Halloween',
+      releaseDate: '2001-02-23',
+      imgSrc: '../../../../assets/test_images/flowers-276014_1280.jpg' 
+    },
   ]
 
   scrollLeft(){
@@ -49,7 +84,5 @@ export class HomeComponent {
     }
   }
 
-
-  
 
 }
