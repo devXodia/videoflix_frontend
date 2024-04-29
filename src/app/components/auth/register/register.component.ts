@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import {
   trigger,
@@ -10,7 +10,7 @@ import {
   animate,
   transition,
 } from '@angular/animations';
-import { DjangoResponse } from '../interfaces/DjangoResponse.interface';
+import { DjangoResponse } from '../../interfaces/DjangoResponse.interface';
 @Component({
   selector: 'app-register',
   standalone: true,

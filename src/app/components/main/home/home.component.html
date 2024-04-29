@@ -33,46 +33,11 @@
             
         <div #movieListContainer class="movie-list flex gap-3 h-full w-full overflow-hidden ">
 
-         
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 1</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 2</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 3</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 4</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 5</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 6</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 7</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 8</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 9</span>
-            </div>
-
-            <div class="movie min-w-[300px] flex bg-white h-full justify-center items-center">
-                <span>Movie Preivew 10</span>
-            </div>
+         @for(movie of movieList; track movie.imgSrc){
+            <app-movie-card>
+                <img movieCardImage class="w-full h-full" src="{{ movie.imgSrc }}">
+            </app-movie-card>
+         }
 
             
         </div>

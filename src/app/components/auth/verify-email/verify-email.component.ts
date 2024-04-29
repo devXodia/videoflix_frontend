@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
-import { AuthService } from '../services/auth.service';
+import { AuthService } from '../../services/auth.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
-import { DjangoResponse } from '../interfaces/DjangoResponse.interface';
+import { DjangoResponse } from '../../interfaces/DjangoResponse.interface';
 
 @Component({
   selector: 'app-verify-email',

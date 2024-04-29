@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
-import { DjangoResponse } from '../../interfaces/DjangoResponse.interface';
+import { AuthService } from '../../../services/auth.service';
+import { DjangoResponse } from '../../../interfaces/DjangoResponse.interface';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
