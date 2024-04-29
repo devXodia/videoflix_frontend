@@ -30,6 +30,10 @@ yarn-error.log
 !.vscode/extensions.json
 .history/*
 
+#Test Assets
+src/assets/test_videos
+src/assets/test_images
+
 # Miscellaneous
 /.angular/cache
 .sass-cache/
