@@ -21,7 +21,7 @@ export class HomeComponent {
     {
       movieName: 'Halloween',
       releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/polynesia-3021072_640.jpg' 
+      imgSrc: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
     },
     {
       movieName: 'Halloween',
@@ -36,7 +36,7 @@ export class HomeComponent {
     {
       movieName: 'Halloween',
       releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/polynesia-3021072_640.jpg' 
+      imgSrc: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
     },
     {
       movieName: 'Halloween',
@@ -52,7 +52,7 @@ export class HomeComponent {
     {
       movieName: 'Halloween',
       releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/polynesia-3021072_640.jpg' 
+      imgSrc: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
     },
     {
       movieName: 'Halloween',
