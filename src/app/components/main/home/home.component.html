@@ -29,26 +29,38 @@
        
 
         <div class="relative flex h-full w-full">
+
+            <div (click)="scrollLeft()" class="arrow-left    w-[3%] min-h-[200px] max-h-[200px] flex items-center justify-center bg-transparent   cursor-pointer">
+                <img src="../../../../assets/images/arrow_home_left.png">
+            </div>
             
         <div #movieListContainer class="movie-list flex gap-4 h-full w-full overflow-hidden ">
 
-         @for(movie of movieList; track $index;){
+         @for(movie of movieList; track $index; let last = $last){
+
+            @if(last){
+                <app-movie-card customClass=""
+                >
+                     
+                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.imgSrc }}">
+                </app-movie-card>
+            }
+            @else{
+                <app-movie-card customClass="hover:mx-12"
+                >
+                     
+                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.imgSrc }}">
+                </app-movie-card>
+            }
             
-            
-            <app-movie-card customClass=""
-            >
-                 
-                <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.imgSrc }}">
-            </app-movie-card>
+
          }
 
         </div>
 
-        <div (click)="scrollLeft()" class="arrow-left absolute left-0 w-[3%] min-h-[200px] flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 cursor-pointer">
-            <img src="../../../../assets/images/arrow_home_left.png">
-        </div>
+        
 
-        <div (click)="scrollRight()" class="arrow-right absolute right-0 w-[3%] min-h-[200px] flex items-center justify-center bg-black bg-opacity-20 hover:bg-opacity-30 cursor-pointer">
+        <div (click)="scrollRight()" class="arrow-right     w-[3%] min-h-[200px] max-h-[200px] flex items-center justify-center bg-transparent  cursor-pointer">
             <img src="../../../../assets/images/arrow_home_right.png">
         </div>
     </div>
