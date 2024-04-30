@@ -1,8 +1,33 @@
 
-<div [class]="customClass"  class="rounded-md min-w-[350px] hover:rounded-md hover:mx-16 max-w-[450px] max-h-[200px] flex bg-white h-full scale-100 justify-center items-center hover:cursor-pointer hover:scale-125 transition-all ease-in ">
-    <ng-content select="[movieCardImage]">
+<div [class]="customClass"   class="rounded-md min-w-[350px] hover:rounded-md hover:mx-16 max-w-[450px] max-h-[200px] flex bg-white h-full scale-100 justify-center items-center  hover:scale-125 transition-all ease-out ">
     
-    </ng-content>
+    <div class="rounded-md w-full h-full">
+        
+    
+        <div class="w-full infoContainer flex  h-full   transition-all ease-out absolute bg-transparent hover:bg-black z-20 hover:bg-opacity-50  justify-center items-center gap-5">
+          
+            <div class="showInfo invisible mt-2 flex items-center justify-center gap-5">
+                <div class="transition-all ease-in rounded-md hover:border-opacity-70  flex justify-center items-center gap-1 border-2 p-1 border-white hover:cursor-pointer">
+                    <img class="w-6" src="../../../../assets/images/info.png">
+                    <span class="text-white text-sm">More Info</span>
+                </div>
+                
+                <div class="transition-all ease-in rounded-md flex justify-center items-center gap-1 border-2 p-1 hover:border-opacity-70 border-white hover:cursor-pointer">
+                    <img class="w-6" src="../../../../assets/images/play.png">
+                    <span class="text-white text-sm">Play</span>
+                </div>
+           
+            </div>
+       
+            
+            
+        </div>
 
-  
+
+        <ng-content select="[movieCardImage]">
+    
+        </ng-content>
+    </div>
+    
+    
 </div>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,6 +11,9 @@ import { Component, Input } from '@angular/core';
 
 export class MovieCardComponent {
   @Input() customClass = '';
+  @Input() index = '';
+
+ 
 
 
 }
