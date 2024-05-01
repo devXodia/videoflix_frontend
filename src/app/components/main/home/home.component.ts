@@ -12,58 +12,57 @@ import { Movie } from '../../interfaces/MovieData.interface';
 export class HomeComponent {
   @ViewChild('movieListContainer') movieListContainer!: ElementRef<HTMLDivElement>;
   scrollAmount: number = 800;
+  showMovieDetails: boolean = false;
+  movieSrc: string = '';
+  movieDescription: string = '';
+  movieTitle: string = '';
+  movieGenre: string = '';
+  movieRelease: string = '';  
   movieList: Movie[] = [
     {
-      movieName: 'Halloween',
+      title: 'Halloween',
+      description: 'LA LA LA',
+      genre: 'Action',
       releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/flowers-276014_1280.jpg' 
+      src: '../../../../assets/test_images/flowers-276014_1280.jpg' 
     },
     {
-      movieName: 'Halloween',
-      releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
+      title: 'Star Wars',
+      description: 'LA LA LA',
+      genre: 'Action, Sci Fi',
+      releaseDate: '2008-01-23',
+      src: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
     },
     {
-      movieName: 'Halloween',
-      releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/tree-736885_1280.jpg' 
+      title: 'Hancock',
+      description: 'LA LA LA',
+      genre: 'Action, Fantasy',
+      releaseDate: '2004-04-11',
+      src: '../../../../assets/test_images/tree-736885_1280.jpg' 
     },
     {
-      movieName: 'Halloween',
+      title: 'Mario Kart',
+      description: 'LA LA LA',
+      genre: 'Action',
       releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/flowers-276014_1280.jpg' 
+      src: '../../../../assets/test_images/flowers-276014_1280.jpg' 
     },
     {
-      movieName: 'Halloween',
-      releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
+      title: 'Harry Potter',
+      description: 'LA LA LA',
+      genre: 'Action, Sci Fi',
+      releaseDate: '2008-01-23',
+      src: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
     },
     {
-      movieName: 'Halloween',
-      releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/tree-736885_1280.jpg' 
+      title: 'Fast and Furious: Tokyo Drift',
+      description: 'LA LA LA',
+      genre: 'Action, Fantasy',
+      releaseDate: '2004-04-11',
+      src: '../../../../assets/test_images/tree-736885_1280.jpg' 
     },
-    {
-      movieName: 'Halloween',
-      releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/flowers-276014_1280.jpg' 
-    },
-  
-    {
-      movieName: 'Halloween',
-      releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
-    },
-    {
-      movieName: 'Halloween',
-      releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/tree-736885_1280.jpg' 
-    },
-    {
-      movieName: 'Halloween',
-      releaseDate: '2001-02-23',
-      imgSrc: '../../../../assets/test_images/flowers-276014_1280.jpg' 
-    },
+    
+    
   ]
 
   scrollLeft(){
@@ -84,6 +83,18 @@ export class HomeComponent {
     }
   }
 
-  
+  switchShowMovieDetails(){
+    this.showMovieDetails = !this.showMovieDetails;
+  }
+
+  handleMovieDetails($event: Movie){
+    this.movieGenre = $event.genre;
+    this.movieDescription = $event.description;
+    this.movieTitle = $event.title;
+    this.movieSrc = $event.src;
+    this.movieRelease = $event.releaseDate;
+    this.switchShowMovieDetails();
+    
+  }
 
 }

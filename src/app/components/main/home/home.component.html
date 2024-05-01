@@ -39,17 +39,17 @@
          @for(movie of movieList; track $index; let last = $last){
 
             @if(last){
-                <app-movie-card customClass=""
+                <app-movie-card [src]="movie.src" [genre]="movie.genre" [description]="movie.description" [title]="movie.title" [releaseDate]="movie.releaseDate" (openMovie)="handleMovieDetails($event)" customClass=""
                 >
                      
-                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.imgSrc }}">
+                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.src }}">
                 </app-movie-card>
             }
             @else{
-                <app-movie-card customClass="hover:mx-12"
+                <app-movie-card [src]="movie.src" [genre]="movie.genre" [description]="movie.description" [title]="movie.title" [releaseDate]="movie.releaseDate" (openMovie)="handleMovieDetails($event)" customClass="hover:mx-12"
                 >
                      
-                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.imgSrc }}">
+                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.src }}">
                 </app-movie-card>
             }
             
@@ -68,5 +68,34 @@
     </div>
     </div>
 
+        @if(showMovieDetails){
+            <div class="flex absolute w-screen h-screen z-19 justify-center transition-all ease-in">
+        
+                <div class="bg-[#141414] relative top-20 z-50 min-w-[800px] max-w-[800px] min-h-[750px] max-h-[800px] rounded-lg  bg-opacity-80 flex flex-col p-10 drop-shadow-lg">
+                    <div class="exit cursor-pointer w-8  self-end" (click)="switchShowMovieDetails()">
+                        <img class="w-8" src="../../../../assets/images/x.svg"> 
+                    </div>
+                   <div class="video-preview w-full max-h-[400px] mt-5">
+                    <video class="w-full max-h-[400px] rounded-xl" poster="{{movieSrc}}" autolay loop src="{{movieSrc}}"></video>
+                   </div>
+            
+                   <div class="title w-full mt-8">
+                    <h1 class="text-white max-w-full text-4xl">{{ movieTitle }}</h1>
+                   </div>
+                   <div class="description text-white  mt-5">
+                    <span class="">Description:</span>
+                    <p class="mt-2">{{ movieDescription }}</p>
+                   </div>
+            
+                   <div class="genre  mt-8">
+                    <span class="text-white">Genre: {{ movieGenre }}</span>
+                   
+                   </div>
+                </div>
+            </div>
+        }
+        
+    
+    
 </section>
 
