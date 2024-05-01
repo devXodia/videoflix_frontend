@@ -17,7 +17,7 @@
 </nav>
 
 
-<section class="w-full h-screen flex justify-center items-center bg-[#141414]
+<section class="w-full h-screen flex justify-center items-center bg-[#141414] 
 ">
     <div class="bg-slate-800 w-full h-full flex justify-center items-center overflow-hidden">
         <div class="w-full h-full flex justify-center items-center ">
@@ -69,14 +69,14 @@
     </div>
 
         @if(showMovieDetails){
-            <div class="flex absolute w-screen h-screen z-19 justify-center transition-all ease-in">
+            <div  class="flex absolute w-screen h-screen z-19 justify-center items-center transition-all ease-in overflow-hidden">
         
-                <div class="bg-[#141414] relative top-20 z-50 min-w-[800px] max-w-[800px] min-h-[750px] max-h-[800px] rounded-lg  bg-opacity-80 flex flex-col p-10 drop-shadow-lg">
+                <div class="bg-[#141414] z-50 duration-150  h-[85%] rounded-lg  bg-opacity-80 flex flex-col p-10 drop-shadow-lg">
                     <div class="exit cursor-pointer w-8  self-end" (click)="switchShowMovieDetails()">
                         <img class="w-8" src="../../../../assets/images/x.svg"> 
                     </div>
                    <div class="video-preview w-full max-h-[400px] mt-5">
-                    <video class="w-full max-h-[400px] rounded-xl" poster="{{movieSrc}}" autolay loop src="{{movieSrc}}"></video>
+                    <video class="min-w-full max-h-[400px] rounded-xl" poster="{{movieSrc}}" autolay loop src="{{movieSrc}}"></video>
                    </div>
             
                    <div class="title w-full mt-8">

@@ -1,13 +1,19 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { Movie } from '../../interfaces/MovieData.interface';
+import { CommonModule } from '@angular/common';
+
+
+
+
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MovieCardComponent],
+  imports: [MovieCardComponent,CommonModule],
   templateUrl: './home.component.html',
-  styleUrl: './home.component.scss'
+  styleUrl: './home.component.scss',
+ 
 })
 export class HomeComponent {
   @ViewChild('movieListContainer') movieListContainer!: ElementRef<HTMLDivElement>;
@@ -18,6 +24,7 @@ export class HomeComponent {
   movieTitle: string = '';
   movieGenre: string = '';
   movieRelease: string = '';  
+ 
   movieList: Movie[] = [
     {
       title: 'Halloween',
@@ -85,6 +92,7 @@ export class HomeComponent {
 
   switchShowMovieDetails(){
     this.showMovieDetails = !this.showMovieDetails;
+   
   }
 
   handleMovieDetails($event: Movie){
