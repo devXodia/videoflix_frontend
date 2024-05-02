@@ -33,7 +33,7 @@ export class HomeComponent {
   movieList: Movie[] = [
     {
       title: 'Halloween',
-      description: 'The dark hunted hut',
+      description: 'The dark haunted hut',
       genre: 'Horror',
       releaseDate: '2001-02-23',
       src: '../../../../assets/test_videos/hut.mp4',
