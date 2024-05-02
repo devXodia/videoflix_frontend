@@ -20,6 +20,7 @@ export class MovieCardComponent {
   @Input() src = '';
   @Input() releaseDate = '';
   @Input() genre: string = '';
+  @Input() poster: string | undefined = '';
   
 
  
@@ -30,7 +31,8 @@ export class MovieCardComponent {
       description: this.description,
       src: this.src,
       releaseDate: this.releaseDate,
-      genre: this.genre
+      genre: this.genre,
+      poster: this.poster
     });
   }
 }

@@ -3,6 +3,7 @@ export interface Movie {
     releaseDate: string,
     src: string,
     genre: string,
-    description: string
+    description: string,
+    poster: string | undefined,
   }
   

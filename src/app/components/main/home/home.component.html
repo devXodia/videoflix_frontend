@@ -21,7 +21,7 @@
 ">
     <div class="bg-slate-800 w-full h-full flex justify-center items-center overflow-hidden">
         <div class="w-full h-full flex justify-center items-center ">
-            <video #homeVideo  loop class="min-w-screen min-h-screen" src="../../../../assets/test_videos/28707-371213524_small.mp4"></video>
+            <video #homeVideo muted loop class="min-w-screen min-h-screen" src="../../../../assets/test_videos/numbers.mp4"></video>
     </div>
 
     <div class="w-full flex flex-col bottom-4 h-[30%] absolute gap-2 ">
@@ -39,17 +39,17 @@
          @for(movie of movieList; track $index; let last = $last){
 
             @if(last){
-                <app-movie-card [src]="movie.src" [genre]="movie.genre" [description]="movie.description" [title]="movie.title" [releaseDate]="movie.releaseDate" (openMovie)="handleMovieDetails($event)" customClass=""
+                <app-movie-card [src]="movie.src" [poster]="movie.poster" [genre]="movie.genre" [description]="movie.description" [title]="movie.title" [releaseDate]="movie.releaseDate" (openMovie)="handleMovieDetails($event)" customClass=""
                 >
                      
-                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.src }}">
+                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.poster }}">
                 </app-movie-card>
             }
             @else{
-                <app-movie-card [src]="movie.src" [genre]="movie.genre" [description]="movie.description" [title]="movie.title" [releaseDate]="movie.releaseDate" (openMovie)="handleMovieDetails($event)" customClass="hover:mx-12"
+                <app-movie-card [poster]="movie.poster" [src]="movie.src" [genre]="movie.genre" [description]="movie.description" [title]="movie.title" [releaseDate]="movie.releaseDate" (openMovie)="handleMovieDetails($event)" customClass="hover:mx-12"
                 >
                      
-                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.src }}">
+                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.poster }}">
                 </app-movie-card>
             }
             
@@ -76,7 +76,7 @@
                         <img class="w-8" src="../../../../assets/images/x.svg"> 
                     </div>
                    <div class="video-preview w-full max-h-[400px] mt-5">
-                    <video #containerVideo src="../../../../assets/test_videos/192687-893427276_medium.mp4" class="min-w-full max-h-[400px] rounded-xl"  autolay loop></video>
+                    <video poster="{{moviePoster}}" muted #containerVideo src="{{movieSrc}}" class="min-w-full max-h-[400px] rounded-xl" loop></video>
                    </div>
             
                    <div class="title w-full mt-8">

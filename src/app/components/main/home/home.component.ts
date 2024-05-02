@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { Movie } from '../../interfaces/MovieData.interface';
 import { CommonModule } from '@angular/common';
@@ -18,7 +18,7 @@ import { CommonModule } from '@angular/common';
 export class HomeComponent {
   @ViewChild('movieListContainer') movieListContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('homeVideo') homeVideo!: ElementRef<HTMLVideoElement>;
-  @ViewChild('containerVideo') containerVideo!: ElementRef<HTMLVideoElement>;
+  @ViewChild('containerVideo' ) containerVideo!: ElementRef<HTMLVideoElement>;
   scrollAmount: number = 800;
   showMovieDetails: boolean = false;
   movieSrc: string = '';
@@ -26,59 +26,64 @@ export class HomeComponent {
   movieTitle: string = '';
   movieGenre: string = '';
   movieRelease: string = '';  
+  moviePoster: string | undefined = '';
  
   movieList: Movie[] = [
     {
       title: 'Halloween',
-      description: 'LA LA LA',
-      genre: 'Action',
+      description: 'The dark hunted hut',
+      genre: 'Horror',
       releaseDate: '2001-02-23',
-      src: '../../../../assets/test_images/flowers-276014_1280.jpg' 
+      src: '../../../../assets/test_videos/hut.mp4',
+      poster: '../../../../assets/test_images/poster_hut.png' 
     },
     {
       title: 'Star Wars',
       description: 'LA LA LA',
       genre: 'Action, Sci Fi',
       releaseDate: '2008-01-23',
-      src: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
+      src: '../../../../assets/test_videos/earth.mp4',
+      poster: '../../../../assets/test_images/earth.png'  
     },
     {
-      title: 'Hancock',
-      description: 'LA LA LA',
-      genre: 'Action, Fantasy',
-      releaseDate: '2004-04-11',
-      src: '../../../../assets/test_images/tree-736885_1280.jpg' 
-    },
-    {
-      title: 'Mario Kart',
-      description: 'LA LA LA',
-      genre: 'Action',
+      title: 'Halloween',
+      description: 'The dark hunted hut',
+      genre: 'Horror',
       releaseDate: '2001-02-23',
-      src: '../../../../assets/test_images/flowers-276014_1280.jpg' 
+      src: '../../../../assets/test_videos/hut.mp4',
+      poster: '../../../../assets/test_images/poster_hut.png' 
     },
     {
-      title: 'Harry Potter',
+      title: 'Star Wars',
       description: 'LA LA LA',
       genre: 'Action, Sci Fi',
       releaseDate: '2008-01-23',
-      src: '../../../../assets/test_images/polynesia-3021072_1280.jpg' 
+      src: '../../../../assets/test_videos/earth.mp4',
+      poster: '../../../../assets/test_images/earth.png'  
     },
     {
-      title: 'Fast and Furious: Tokyo Drift',
+      title: 'Halloween',
+      description: 'The dark hunted hut',
+      genre: 'Horror',
+      releaseDate: '2001-02-23',
+      src: '../../../../assets/test_videos/hut.mp4',
+      poster: '../../../../assets/test_images/poster_hut.png' 
+    },
+    {
+      title: 'Star Wars',
       description: 'LA LA LA',
-      genre: 'Action, Fantasy',
-      releaseDate: '2004-04-11',
-      src: '../../../../assets/test_images/tree-736885_1280.jpg' 
+      genre: 'Action, Sci Fi',
+      releaseDate: '2008-01-23',
+      src: '../../../../assets/test_videos/earth.mp4',
+      poster: '../../../../assets/test_images/earth.png'  
     },
     
     
   ]
 
   ngAfterViewInit(){
-    if(this.homeVideo && this.homeVideo.nativeElement){
-      this.homeVideo.nativeElement.play();
-    }
-    this.containerVideo.nativeElement.play();
+    this.homeVideo.nativeElement.autoplay = true;
+   
     
   }
  
@@ -103,7 +108,6 @@ export class HomeComponent {
 
   switchShowMovieDetails(){
     this.showMovieDetails = !this.showMovieDetails;
-   
   }
 
   handleMovieDetails($event: Movie){
@@ -112,8 +116,9 @@ export class HomeComponent {
     this.movieTitle = $event.title;
     this.movieSrc = $event.src;
     this.movieRelease = $event.releaseDate;
+    this.moviePoster = $event.poster
     this.switchShowMovieDetails();
-    
+    this.containerVideo.nativeElement.autoplay = true;
   }
 
 }
