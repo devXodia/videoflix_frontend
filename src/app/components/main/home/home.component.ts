@@ -17,6 +17,8 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
   @ViewChild('movieListContainer') movieListContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('homeVideo') homeVideo!: ElementRef<HTMLVideoElement>;
+  @ViewChild('containerVideo') containerVideo!: ElementRef<HTMLVideoElement>;
   scrollAmount: number = 800;
   showMovieDetails: boolean = false;
   movieSrc: string = '';
@@ -71,6 +73,15 @@ export class HomeComponent {
     
     
   ]
+
+  ngAfterViewInit(){
+    if(this.homeVideo && this.homeVideo.nativeElement){
+      this.homeVideo.nativeElement.play();
+    }
+    this.containerVideo.nativeElement.play();
+    
+  }
+ 
 
   scrollLeft(){
     if (this.movieListContainer) {

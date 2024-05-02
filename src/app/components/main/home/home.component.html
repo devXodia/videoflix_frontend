@@ -21,7 +21,7 @@
 ">
     <div class="bg-slate-800 w-full h-full flex justify-center items-center overflow-hidden">
         <div class="w-full h-full flex justify-center items-center ">
-            <video autoplay loop class="min-w-screen min-h-screen" src="../../../../assets/test_videos/28707-371213524_small.mp4"></video>
+            <video #homeVideo  loop class="min-w-screen min-h-screen" src="../../../../assets/test_videos/28707-371213524_small.mp4"></video>
     </div>
 
     <div class="w-full flex flex-col bottom-4 h-[30%] absolute gap-2 ">
@@ -68,15 +68,15 @@
     </div>
     </div>
 
-        @if(showMovieDetails){
-            <div  class="flex absolute w-screen h-screen z-19 justify-center items-center transition-all ease-in overflow-hidden">
+       
+            <div [class]="showMovieDetails ? 'visible' : 'hidden'" class="flex absolute w-screen h-screen z-19 justify-center items-center transition-all ease-in overflow-hidden">
         
                 <div class="bg-[#141414] z-50 duration-150  h-[85%] rounded-lg  bg-opacity-80 flex flex-col p-10 drop-shadow-lg">
                     <div class="exit cursor-pointer w-8  self-end" (click)="switchShowMovieDetails()">
                         <img class="w-8" src="../../../../assets/images/x.svg"> 
                     </div>
                    <div class="video-preview w-full max-h-[400px] mt-5">
-                    <video class="min-w-full max-h-[400px] rounded-xl" poster="{{movieSrc}}" autolay loop src="{{movieSrc}}"></video>
+                    <video #containerVideo src="../../../../assets/test_videos/192687-893427276_medium.mp4" class="min-w-full max-h-[400px] rounded-xl"  autolay loop></video>
                    </div>
             
                    <div class="title w-full mt-8">
@@ -93,7 +93,7 @@
                    </div>
                 </div>
             </div>
-        }
+        
         
     
     

@@ -11,6 +11,7 @@ import { Movie } from '../../interfaces/MovieData.interface';
 
 
 export class MovieCardComponent {
+  
   @Input() customClass = '';
   @Input() index = '';
   @Output() openMovie = new EventEmitter<Movie>();
@@ -19,6 +20,8 @@ export class MovieCardComponent {
   @Input() src = '';
   @Input() releaseDate = '';
   @Input() genre: string = '';
+  
+
  
 
   openMovieContainer(){
