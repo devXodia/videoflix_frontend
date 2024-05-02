@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener, Renderer2 } from '@angular/core';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { Movie } from '../../interfaces/MovieData.interface';
 import { CommonModule } from '@angular/common';
@@ -19,6 +19,8 @@ export class HomeComponent {
   @ViewChild('movieListContainer') movieListContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('homeVideo') homeVideo!: ElementRef<HTMLVideoElement>;
   @ViewChild('containerVideo' ) containerVideo!: ElementRef<HTMLVideoElement>;
+  @ViewChild('cardContainer') cardContainer!: ElementRef<HTMLDivElement>;
+  @ViewChild('bgCardContainer') bgCardContainer!: ElementRef<HTMLDivElement>;
   scrollAmount: number = 800;
   showMovieDetails: boolean = false;
   movieSrc: string = '';
@@ -81,12 +83,13 @@ export class HomeComponent {
     
   ]
 
+  constructor(private renderer: Renderer2){}
+
   ngAfterViewInit(){
     this.homeVideo.nativeElement.autoplay = true;
    
     
   }
- 
 
   scrollLeft(){
     if (this.movieListContainer) {
@@ -105,6 +108,17 @@ export class HomeComponent {
       });
     }
   }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const clickedWithinBgCardContainer = this.bgCardContainer.nativeElement.contains(event.target as Node);
+    const clickedWithinCardContainer = this.cardContainer.nativeElement.contains(event.target as Node);
+  
+    if (clickedWithinBgCardContainer && !clickedWithinCardContainer) {
+      this.switchShowMovieDetails();
+    }
+  }
+
 
   switchShowMovieDetails(){
     this.showMovieDetails = !this.showMovieDetails;
