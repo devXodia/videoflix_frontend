@@ -17,8 +17,8 @@ import { CommonModule } from '@angular/common';
 })
 export class HomeComponent {
   @ViewChild('movieListContainer') movieListContainer!: ElementRef<HTMLDivElement>;
-  @ViewChild('homeVideo') homeVideo!: ElementRef<HTMLVideoElement>;
-  @ViewChild('containerVideo' ) containerVideo!: ElementRef<HTMLVideoElement>;
+  @ViewChild('homeMovie') homeMovie!: ElementRef<HTMLVideoElement>;
+  @ViewChild('containerMovie' ) containerMovie!: ElementRef<HTMLVideoElement>;
   @ViewChild('cardContainer') cardContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('bgCardContainer') bgCardContainer!: ElementRef<HTMLDivElement>;
   scrollAmount: number = 800;
@@ -29,6 +29,7 @@ export class HomeComponent {
   movieGenre: string = '';
   movieRelease: string = '';  
   moviePoster: string | undefined = '';
+  moviePlaying: boolean = false;
  
   movieList: Movie[] = [
     {
@@ -86,9 +87,25 @@ export class HomeComponent {
   constructor(private renderer: Renderer2){}
 
   ngAfterViewInit(){
-    this.homeVideo.nativeElement.autoplay = true;
+    this.homeMovie.nativeElement.autoplay = true;
    
     
+  }
+
+  playMovie(){
+    this.moviePlaying = true;
+    this.containerMovie.nativeElement.play();
+    this.containerMovie.nativeElement.controls = true;
+    this.containerMovie.nativeElement.muted = false;
+    
+  }
+
+  stopMovie(){
+    this.moviePlaying = false;
+    this.containerMovie.nativeElement.pause();
+    this.containerMovie.nativeElement.currentTime = 0;
+    this.containerMovie.nativeElement.controls = false;
+    this.containerMovie.nativeElement.muted = true;
   }
 
   scrollLeft(){
@@ -122,6 +139,9 @@ export class HomeComponent {
 
   switchShowMovieDetails(){
     this.showMovieDetails = !this.showMovieDetails;
+    if(this.moviePlaying){
+      this.stopMovie();
+    }
   }
 
   handleMovieDetails($event: Movie){
@@ -132,7 +152,7 @@ export class HomeComponent {
     this.movieRelease = $event.releaseDate;
     this.moviePoster = $event.poster
     this.switchShowMovieDetails();
-    this.containerVideo.nativeElement.autoplay = true;
+   
   }
 
 }

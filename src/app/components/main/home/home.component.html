@@ -21,7 +21,7 @@
 ">
     <div class="bg-[#141414] w-full h-full flex justify-center items-center overflow-hidden">
         <div class="w-full h-full flex justify-center items-center ">
-            <video #homeVideo muted loop class="min-w-screen min-h-screen" src="../../../../assets/test_videos/numbers.mp4"></video>
+            <video #homeMovie muted loop class="min-w-screen min-h-screen" src="../../../../assets/test_videos/numbers.mp4"></video>
     </div>
 
     <div class="w-full flex flex-col bottom-4 h-[30%] absolute gap-2 ">
@@ -42,14 +42,14 @@
                 <app-movie-card [src]="movie.src" [poster]="movie.poster" [genre]="movie.genre" [description]="movie.description" [title]="movie.title" [releaseDate]="movie.releaseDate" (openMovie)="handleMovieDetails($event)" customClass=""
                 >
                      
-                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.poster }}">
+                    <img movieCardImage class="rounded-lg w-full h-full" src="{{ movie.poster }}">
                 </app-movie-card>
             }
             @else{
                 <app-movie-card [poster]="movie.poster" [src]="movie.src" [genre]="movie.genre" [description]="movie.description" [title]="movie.title" [releaseDate]="movie.releaseDate" (openMovie)="handleMovieDetails($event)" customClass="hover:mx-12"
                 >
                      
-                    <img movieCardImage class="rounded-md w-full h-full" src="{{ movie.poster }}">
+                    <img movieCardImage class="rounded-lg w-full h-full" src="{{ movie.poster }}">
                 </app-movie-card>
             }
             
@@ -76,12 +76,14 @@
                         <img class="w-8" src="../../../../assets/images/x.svg"> 
                     </div>
                    <div class=" video-preview w-full relative max-h-[400px] mt-5">
-                    <div class="bg-white w-full flex justify-center items-center h-full absolute bg-opacity-25">
-                        <img class="w-[82px] absolute z-20 cursor-pointer" src="../../../../assets/images/playbtn.svg">
+                    <div [class]="moviePlaying ? '' : 'bg-white'" class=" w-full flex justify-center items-center h-full absolute bg-opacity-25">
+                        <img [class]="moviePlaying ? 'hidden' : ''" (click)="playMovie()" class="w-[82px] absolute z-20 cursor-pointer" src="../../../../assets/images/playbtn.svg">
                     </div>
-                        <video poster="{{moviePoster}}" muted #containerVideo src="{{movieSrc}}" class="min-w-full max-h-[400px] rounded-xl" loop></video>
+                        <video poster="{{moviePoster}}" #containerMovie src="{{movieSrc}}" class="min-w-full max-h-[400px] rounded-xl">
+                        
+                    </video>
                    </div>
-            
+                   
                    <div class="title w-full mt-8">
                     <h1 class="text-white max-w-full text-4xl">{{ movieTitle }}</h1>
                    </div>
