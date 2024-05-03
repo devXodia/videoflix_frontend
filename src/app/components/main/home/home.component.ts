@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, HostListener, Renderer2 } from '@angu
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { Movie } from '../../interfaces/MovieData.interface';
 import { CommonModule } from '@angular/common';
-
+import { MoviesService } from '../../services/movies.service';
 
 
 
@@ -84,7 +84,17 @@ export class HomeComponent {
     
   ]
 
-  constructor(private renderer: Renderer2){}
+  constructor(private renderer: Renderer2, private movieService: MoviesService){
+    
+    this.movieService.stream420p('hut').subscribe({
+      next: (resp) => {
+        console.log('this is my response: ', resp)
+      },
+      error : (err) => {
+        console.error('error: ', err)
+      }
+    })
+  }
 
   ngAfterViewInit(){
     this.homeMovie.nativeElement.autoplay = true;
