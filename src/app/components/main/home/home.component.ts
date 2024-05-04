@@ -2,7 +2,8 @@ import { Component, ViewChild, ElementRef, HostListener, Renderer2 } from '@angu
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { Movie } from '../../interfaces/MovieData.interface';
 import { CommonModule } from '@angular/common';
-import { MoviesService } from '../../services/movies.service';
+import { VideoPlayerComponent } from '../../video-player/video-player.component';
+
 
 
 
@@ -10,7 +11,7 @@ import { MoviesService } from '../../services/movies.service';
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [MovieCardComponent,CommonModule],
+  imports: [MovieCardComponent,CommonModule, VideoPlayerComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
  
@@ -84,22 +85,11 @@ export class HomeComponent {
     
   ]
 
-  constructor(private renderer: Renderer2, private movieService: MoviesService){
+  constructor(private renderer: Renderer2, ){}
     
-    this.movieService.stream420p('hut').subscribe({
-      next: (resp) => {
-        console.log('this is my response: ', resp)
-      },
-      error : (err) => {
-        console.error('error: ', err)
-      }
-    })
-  }
-
+    
   ngAfterViewInit(){
-    this.homeMovie.nativeElement.autoplay = true;
-   
-    
+   /*  this.homeMovie.nativeElement.autoplay = true; */
   }
 
   playMovie(){

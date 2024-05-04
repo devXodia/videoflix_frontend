@@ -21,7 +21,8 @@
 ">
     <div class="bg-[#141414] w-full h-full flex justify-center items-center overflow-hidden">
         <div class="w-full h-full flex justify-center items-center ">
-            <video #homeMovie muted loop class="min-w-screen min-h-screen" src="../../../../assets/test_videos/numbers.mp4"></video>
+           
+            <app-video-player class="h-screen w-screen" [options]="{autoplay: true, fluid: true, controls: false, loop: true, sources: [{ src: 'http://127.0.0.1:8000/media/videos/numbers/numbers.mp4', type: 'video/mp4' }]}"></app-video-player>
     </div>
 
     <div class="w-full flex flex-col bottom-4 h-[30%] absolute gap-2 ">
