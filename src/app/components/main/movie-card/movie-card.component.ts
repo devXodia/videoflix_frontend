@@ -17,10 +17,9 @@ export class MovieCardComponent {
   @Output() openMovie = new EventEmitter<Movie>();
   @Input() title = '';
   @Input() description = '';
-  @Input() src = '';
-  @Input() releaseDate = '';
+
   @Input() genre: string = '';
-  @Input() poster: string | undefined = '';
+
   
 
  
@@ -29,10 +28,7 @@ export class MovieCardComponent {
     this.openMovie.emit({
       title: this.title,
       description: this.description,
-      src: this.src,
-      releaseDate: this.releaseDate,
       genre: this.genre,
-      poster: this.poster
     });
   }
 }

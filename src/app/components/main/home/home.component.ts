@@ -3,6 +3,8 @@ import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { Movie } from '../../interfaces/MovieData.interface';
 import { CommonModule } from '@angular/common';
 import { VideoPlayerComponent } from '../../video-player/video-player.component';
+import { MovieService } from '../../services/movie.service';
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 
 
 
@@ -32,64 +34,24 @@ export class HomeComponent {
   moviePoster: string | undefined = '';
   moviePlaying: boolean = false;
  
-  movieList: Movie[] = [
-    {
-      title: 'Halloween',
-      description: 'The dark haunted hut',
-      genre: 'Horror',
-      releaseDate: '2001-02-23',
-      src: '../../../../assets/test_videos/hut.mp4',
-      poster: '../../../../assets/test_images/poster_hut.png' 
-    },
-    {
-      title: 'Star Wars',
-      description: 'LA LA LA',
-      genre: 'Action, Sci Fi',
-      releaseDate: '2008-01-23',
-      src: '../../../../assets/test_videos/earth.mp4',
-      poster: '../../../../assets/test_images/earth.png'  
-    },
-    {
-      title: 'Halloween',
-      description: 'The dark hunted hut',
-      genre: 'Horror',
-      releaseDate: '2001-02-23',
-      src: '../../../../assets/test_videos/hut.mp4',
-      poster: '../../../../assets/test_images/poster_hut.png' 
-    },
-    {
-      title: 'Star Wars',
-      description: 'LA LA LA',
-      genre: 'Action, Sci Fi',
-      releaseDate: '2008-01-23',
-      src: '../../../../assets/test_videos/earth.mp4',
-      poster: '../../../../assets/test_images/earth.png'  
-    },
-    {
-      title: 'Halloween',
-      description: 'The dark hunted hut',
-      genre: 'Horror',
-      releaseDate: '2001-02-23',
-      src: '../../../../assets/test_videos/hut.mp4',
-      poster: '../../../../assets/test_images/poster_hut.png' 
-    },
-    {
-      title: 'Star Wars',
-      description: 'LA LA LA',
-      genre: 'Action, Sci Fi',
-      releaseDate: '2008-01-23',
-      src: '../../../../assets/test_videos/earth.mp4',
-      poster: '../../../../assets/test_images/earth.png'  
-    },
-    
-    
-  ]
+  movieList!: Movie[];
 
-  constructor(private renderer: Renderer2, ){}
+  constructor(private renderer: Renderer2, private movie: MovieService){}
     
     
   ngAfterViewInit(){
-   /*  this.homeMovie.nativeElement.autoplay = true; */
+    this.fetchMovieList()
+  }
+
+  fetchMovieList(){
+    this.movie.getMovieList().subscribe({
+      next: (resp: Movie[]) => {
+      this.movieList = resp;
+      },
+      error: (err: HttpErrorResponse) => {
+        console.error('error ', err)
+      }
+    })
   }
 
   playMovie(){
@@ -148,9 +110,6 @@ export class HomeComponent {
     this.movieGenre = $event.genre;
     this.movieDescription = $event.description;
     this.movieTitle = $event.title;
-    this.movieSrc = $event.src;
-    this.movieRelease = $event.releaseDate;
-    this.moviePoster = $event.poster
     this.switchShowMovieDetails();
    
   }
