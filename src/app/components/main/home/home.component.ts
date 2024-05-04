@@ -34,6 +34,7 @@ export class HomeComponent {
   moviePoster: string | undefined = '';
   moviePlaying: boolean = false;
   src: string = '';
+  Imgsrc: string = '';
   movieList!: Movie[];
 
   constructor(private renderer: Renderer2, private movie: MovieService){}
@@ -47,6 +48,9 @@ export class HomeComponent {
     this.movie.getMovieList().subscribe({
       next: (resp: Movie[]) => {
       this.movieList = resp;
+      this.movieList.forEach((movie: Movie) => {
+        movie.imgSrc = `http://127.0.0.1:8000/media/videos/${movie.title}/poster.jpg`
+      });
       },
       error: (err: HttpErrorResponse) => {
         console.error('error ', err)
@@ -112,7 +116,7 @@ export class HomeComponent {
     this.movieTitle = $event.title;
     this.src = `http://127.0.0.1:8000/media/videos/${this.movieTitle}/480p/${this.movieTitle}_480p.m3u8`
     this.switchShowMovieDetails();
-   
+    
   }
 
 }

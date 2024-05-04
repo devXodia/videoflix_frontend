@@ -16,7 +16,8 @@ export class VideoPlayerComponent {
   @Input() options: any;
   constructor(private elementRef: ElementRef,){}
   @Input() cardMovie: boolean = false;
-  @Input() homeMovie: boolean = false;
+ 
+  @Input() movieTitle: string = '';
   private player!: Player;
 
 

@@ -17,7 +17,7 @@ export class MovieCardComponent {
   @Output() openMovie = new EventEmitter<Movie>();
   @Input() title = '';
   @Input() description = '';
-
+  @Input() imgSrc = '';
   @Input() genre: string = '';
 
   
@@ -29,6 +29,7 @@ export class MovieCardComponent {
       title: this.title,
       description: this.description,
       genre: this.genre,
+      imgSrc: '',
     });
   }
 }

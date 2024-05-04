@@ -22,7 +22,7 @@
     <div class="bg-[#141414] w-full h-full flex justify-center items-center overflow-hidden">
         <div class="w-full h-full flex justify-center items-center ">
            
-            <app-video-player [cardMovie]="false" class="h-screen w-screen" [options]="{autoplay: true, fluid: true, controls: false, loop: true, sources: [{ src: 'http://127.0.0.1:8000/media/videos/numbers/numbers.mp4', type: 'video/mp4' }]}"></app-video-player>
+            <app-video-player [cardMovie]="false" class="h-screen w-screen" [options]="{autoplay: true, fluid: true, controls: false, loop: true, sources: [{ src: 'http://127.0.0.1:8000/media/videos/finance/finance.mp4', type: 'video/mp4' }]}"></app-video-player>
     </div>
 
     <div class="w-full flex flex-col bottom-4 h-[30%] absolute gap-2 ">
@@ -40,14 +40,14 @@
          @for(movie of movieList; track $index; let last = $last){
 
             @if(last){
-                <app-movie-card   [genre]="movie.genre" [description]="movie.description" [title]="movie.title"  (openMovie)="handleMovieDetails($event)" customClass=""
+                <app-movie-card [imgSrc]="movie.imgSrc!"   [genre]="movie.genre" [description]="movie.description" [title]="movie.title"  (openMovie)="handleMovieDetails($event)" customClass=""
                 >
                      
-                    <img movieCardImage class="rounded-lg w-full h-full" src="">
+                    
                 </app-movie-card>
             }
             @else{
-                <app-movie-card [genre]="movie.genre" [description]="movie.description" [title]="movie.title" (openMovie)="handleMovieDetails($event)" customClass="hover:mx-12"
+                <app-movie-card [imgSrc]="movie.imgSrc!"  [genre]="movie.genre" [description]="movie.description" [title]="movie.title" (openMovie)="handleMovieDetails($event)" customClass="hover:mx-12"
                 >
                      
                     <img movieCardImage class="rounded-lg w-full h-full" src="">
@@ -78,7 +78,7 @@
                     </div>
                    <div class=" video-preview w-full relative h-[50%] mt-5">
                     @if(showMovieDetails){
-                        <app-video-player [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: false, controls: true, sources: [{ src: src, type: 'application/x-mpegURL' }]}"></app-video-player>
+                        <app-video-player [movieTitle]="movieTitle" [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: false, controls: true, sources: [{ src: src, type: 'application/x-mpegURL' }]}"></app-video-player>
                     }
                    
                    </div>
