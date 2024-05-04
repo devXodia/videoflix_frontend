@@ -22,7 +22,7 @@
     <div class="bg-[#141414] w-full h-full flex justify-center items-center overflow-hidden">
         <div class="w-full h-full flex justify-center items-center ">
            
-            <app-video-player class="h-screen w-screen" [options]="{autoplay: true, fluid: true, controls: false, loop: true, sources: [{ src: 'http://127.0.0.1:8000/media/videos/numbers/numbers.mp4', type: 'video/mp4' }]}"></app-video-player>
+            <app-video-player [cardMovie]="false" class="h-screen w-screen" [options]="{autoplay: true, fluid: true, controls: false, loop: true, sources: [{ src: 'http://127.0.0.1:8000/media/videos/numbers/numbers.mp4', type: 'video/mp4' }]}"></app-video-player>
     </div>
 
     <div class="w-full flex flex-col bottom-4 h-[30%] absolute gap-2 ">
@@ -40,7 +40,7 @@
          @for(movie of movieList; track $index; let last = $last){
 
             @if(last){
-                <app-movie-card  [genre]="movie.genre" [description]="movie.description" [title]="movie.title"  (openMovie)="handleMovieDetails($event)" customClass=""
+                <app-movie-card   [genre]="movie.genre" [description]="movie.description" [title]="movie.title"  (openMovie)="handleMovieDetails($event)" customClass=""
                 >
                      
                     <img movieCardImage class="rounded-lg w-full h-full" src="">
@@ -72,28 +72,26 @@
        
             <div #bgCardContainer [class]="showMovieDetails ? 'visible' : 'hidden'" class=" flex backdrop-blur-sm absolute w-screen h-screen justify-center items-center transition-all ease-in overflow-hidden">
 
-                <div #cardContainer class="bg-[#141414] mt-5 z-50 duration-150  h-[85%] rounded-lg  bg-opacity-80 flex flex-col p-10 drop-shadow-lg">
+                <div #cardContainer class="bg-[#141414] mt-5 z-50 duration-150 w-[35%]  h-[85%] rounded-lg  bg-opacity-80 flex flex-col p-10 drop-shadow-lg">
                     <div class="exit cursor-pointer w-8  self-end" (click)="switchShowMovieDetails()">
                         <img class="w-8" src="../../../../assets/images/x.svg"> 
                     </div>
-                   <div class=" video-preview w-full relative max-h-[400px] mt-5">
-                    <div [class]="moviePlaying ? '' : 'bg-white'" class=" w-full flex justify-center items-center h-full absolute bg-opacity-25">
-                        <img [class]="moviePlaying ? 'hidden' : ''" (click)="playMovie()" class="w-[82px] absolute z-20 cursor-pointer" src="../../../../assets/images/playbtn.svg">
-                    </div>
-                        <video  #containerMovie class="min-w-full max-h-[400px] rounded-xl">
-                        
-                    </video>
+                   <div class=" video-preview w-full relative h-[50%] mt-5">
+                    @if(showMovieDetails){
+                        <app-video-player [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: false, controls: true, sources: [{ src: src, type: 'application/x-mpegURL' }]}"></app-video-player>
+                    }
+                   
                    </div>
                    
-                   <div class="title w-full mt-8">
+                   <div class="title w-full mt-10">
                     <h1 class="text-white max-w-full text-4xl">{{ movieTitle }}</h1>
                    </div>
                    <div class="description text-white  mt-5">
-                    <span class="">Description:</span>
-                    <p class="mt-2">{{ movieDescription }}</p>
+                    <span class="text-xl">Description:</span>
+                    <p class="mt-2 text-md">{{ movieDescription }}</p>
                    </div>
             
-                   <div class="genre  mt-8">
+                   <div class="genre  mt-10">
                     <span class="text-white">Genre: {{ movieGenre }}</span>
                    
                    </div>

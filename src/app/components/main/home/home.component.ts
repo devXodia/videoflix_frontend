@@ -33,7 +33,7 @@ export class HomeComponent {
   movieRelease: string = '';  
   moviePoster: string | undefined = '';
   moviePlaying: boolean = false;
- 
+  src: string = '';
   movieList!: Movie[];
 
   constructor(private renderer: Renderer2, private movie: MovieService){}
@@ -110,6 +110,7 @@ export class HomeComponent {
     this.movieGenre = $event.genre;
     this.movieDescription = $event.description;
     this.movieTitle = $event.title;
+    this.src = `http://127.0.0.1:8000/media/videos/${this.movieTitle}/480p/${this.movieTitle}_480p.m3u8`
     this.switchShowMovieDetails();
    
   }
