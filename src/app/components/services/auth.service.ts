@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RegisterForm } from '../interfaces/RegisterForm.interface';
 import { VerifyForm } from '../interfaces/VerifyForm.interface';
@@ -16,11 +16,13 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   userToken: string = '';
-  private registerUrl = 'http://127.0.0.1:8000/api/register/';
+  private registerUrl = 'http://127.0.0.1:8000/register/';
   private verifyUrl = `http://127.0.0.1:8000/verify-email/`;
   private loginUrl = 'http://127.0.0.1:8000/login';
   private passwordResetUrl = 'http://127.0.0.1:8000/password-reset'
   private setPasswordUrl = 'http://127.0.0.1:8000/set-password'
+  private refreshTokenUrl = 'http://127.0.0.1:8000/token/refresh/'
+  private logoutUrl = 'http://127.0.0.1:8000/logout/'
 
   registerUser(fullName: string, email: string, pwd1: string): Observable<any> {
     const data: RegisterForm = {
@@ -31,6 +33,12 @@ export class AuthService {
     };
 
     return this.http.post<DjangoResponse>(this.registerUrl, data);
+  }
+
+  refreshJWT(){
+    const token = localStorage.getItem('refresh_token');
+
+    return this.http.post<DjangoResponse>(this.refreshTokenUrl, {refresh: token})
   }
 
   verifyUser(token: string) {
@@ -48,6 +56,18 @@ export class AuthService {
     };
 
     return this.http.post<DjangoResponse>(this.loginUrl, data);
+  }
+
+  logoutUser(){
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+      })
+    };
+
+
+    return this.http.post<DjangoResponse>(this.logoutUrl, {}, httpOptions)
   }
 
   sendPasswordResetLink(email: string){

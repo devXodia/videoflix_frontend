@@ -40,7 +40,7 @@ export class RegisterComponent {
         .subscribe({
           next: (response: DjangoResponse) => {
             this.showSuccessOnUI();
-            console.log(response);
+
           },
           error: (err: HttpErrorResponse) => {
             this.checkTypeError(err);

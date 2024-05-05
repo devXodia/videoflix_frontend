@@ -7,6 +7,9 @@ import { MovieService } from '../../services/movie.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ShareDataService } from '../../services/share-data.service';
 import { Subscription } from 'rxjs';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+
 
 
 
@@ -35,7 +38,7 @@ export class HomeComponent {
   movieGenre: string = '';
   movieRelease: string = '';  
   moviePoster: string | undefined = '';
-  moviePlaying: boolean = false;
+
   src480p: string = '';
   src720p: string = '';
   Imgsrc: string = '';
@@ -44,14 +47,63 @@ export class HomeComponent {
   mode480p: boolean = false;
   mode720p: boolean = true;
 
-  constructor(private renderer: Renderer2, private movie: MovieService, private dataService: ShareDataService){}
+  constructor(private renderer: Renderer2, private movie: MovieService, private dataService: ShareDataService, private auth: AuthService, private router: Router){}
 
 
   ngOnInit(){
     this.recieveMovieData();
   }
   
+  ngAfterViewInit(){
+    this.fetchMovieList()
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onClick(event: MouseEvent) {
+    const clickedWithinBgCardContainer = this.bgCardContainer.nativeElement.contains(event.target as Node);
+    const clickedWithinCardContainer = this.cardContainer.nativeElement.contains(event.target as Node);
   
+    if (clickedWithinBgCardContainer && !clickedWithinCardContainer) {
+      this.switchShowMovieDetails();
+    }
+  }
+
+  refreshToken(){
+    this.auth.refreshJWT().subscribe({
+      next: (resp) => {
+        if(resp.access && resp.refresh){
+          localStorage.setItem('access_token', resp.access);
+          localStorage.setItem('refresh_token', resp.refresh);
+        }
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    })
+  }
+
+  logoutUser(){
+    this.auth.logoutUser().subscribe({
+      next: (resp) => {
+        if(localStorage){
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
+        }
+       
+        this.router.navigateByUrl('');
+      },
+      error: (err) => {
+          localStorage.removeItem('access_token');
+          localStorage.removeItem('refresh_token');
+          this.router.navigateByUrl('');
+      }
+    })
+  }
+
 
   recieveMovieData(){
     this.subscription = this.dataService.movieCardData$.subscribe({
@@ -64,10 +116,7 @@ export class HomeComponent {
     })
   }
     
-  ngAfterViewInit(){
-    this.fetchMovieList()
-  }
-
+ 
   fetchMovieList(){
     this.movie.getMovieList().subscribe({
       next: (resp: Movie[]) => {
@@ -83,16 +132,6 @@ export class HomeComponent {
   }
 
  
-    
-  
-
-  stopMovie(){
-    this.moviePlaying = false;
-    this.containerMovie.nativeElement.pause();
-    this.containerMovie.nativeElement.currentTime = 0;
-    this.containerMovie.nativeElement.controls = false;
-    this.containerMovie.nativeElement.muted = true;
-  }
 
   scrollLeft(){
     if (this.movieListContainer) {
@@ -112,22 +151,11 @@ export class HomeComponent {
     }
   }
 
-  @HostListener('document:click', ['$event'])
-  onClick(event: MouseEvent) {
-    const clickedWithinBgCardContainer = this.bgCardContainer.nativeElement.contains(event.target as Node);
-    const clickedWithinCardContainer = this.cardContainer.nativeElement.contains(event.target as Node);
-  
-    if (clickedWithinBgCardContainer && !clickedWithinCardContainer) {
-      this.switchShowMovieDetails();
-    }
-  }
+ 
 
 
   switchShowMovieDetails(){
     this.showMovieDetails = !this.showMovieDetails;
-    if(this.moviePlaying){
-      this.stopMovie();
-    }
   }
 
   handleMovieDetails(data: Movie){
@@ -145,13 +173,13 @@ export class HomeComponent {
     
   }
 
+  
+
   switchTo720p(){
     this.mode480p = false;
     this.mode720p = true;
   }
 
-  ngOnDestroy(){
-    this.subscription.unsubscribe();
-  }
+  
 
 }

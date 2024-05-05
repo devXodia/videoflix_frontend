@@ -1,3 +1,7 @@
 export interface DjangoResponse {
-  message: string;
+  message? : string ,
+  access?: string ,
+  refresh?: string ,
+
+
 }
