@@ -5,6 +5,8 @@ import { RegisterComponent } from './components/auth/register/register.component
 import { VerifyEmailComponent } from './components/auth/verify-email/verify-email.component';
 import { SetNewPasswordComponent } from './components/auth/password-reset/set-new-password/set-new-password.component';
 import { HomeComponent } from './components/main/home/home.component';
+import { ImprintComponent } from './components/main/imprint/imprint.component';
+import { DataPolicyComponent } from './components/main/data-policy/data-policy.component';
 
 export const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -12,5 +14,7 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'verify/:token', component: VerifyEmailComponent },
   {path: 'set-password/:token', component: SetNewPasswordComponent},
-  {path: 'home', component: HomeComponent}
+  {path: 'home', component: HomeComponent},
+  {path: 'imprint', component: ImprintComponent},
+  {path: 'policy', component: DataPolicyComponent}
 ];
