@@ -1,10 +1,12 @@
-import { Component, ViewChild, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener, Renderer2  } from '@angular/core';
 import { MovieCardComponent } from '../movie-card/movie-card.component';
 import { Movie } from '../../interfaces/MovieData.interface';
 import { CommonModule } from '@angular/common';
 import { VideoPlayerComponent } from '../../video-player/video-player.component';
 import { MovieService } from '../../services/movie.service';
-import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { ShareDataService } from '../../services/share-data.service';
+import { Subscription } from 'rxjs';
 
 
 
@@ -24,6 +26,7 @@ export class HomeComponent {
   @ViewChild('containerMovie' ) containerMovie!: ElementRef<HTMLVideoElement>;
   @ViewChild('cardContainer') cardContainer!: ElementRef<HTMLDivElement>;
   @ViewChild('bgCardContainer') bgCardContainer!: ElementRef<HTMLDivElement>;
+
   scrollAmount: number = 800;
   showMovieDetails: boolean = false;
   movieSrc: string = '';
@@ -33,12 +36,33 @@ export class HomeComponent {
   movieRelease: string = '';  
   moviePoster: string | undefined = '';
   moviePlaying: boolean = false;
-  src: string = '';
+  src480p: string = '';
+  src720p: string = '';
   Imgsrc: string = '';
   movieList!: Movie[];
+  subscription!: Subscription;
+  mode480p: boolean = false;
+  mode720p: boolean = true;
 
-  constructor(private renderer: Renderer2, private movie: MovieService){}
-    
+  constructor(private renderer: Renderer2, private movie: MovieService, private dataService: ShareDataService){}
+
+
+  ngOnInit(){
+    this.recieveMovieData();
+  }
+  
+  
+
+  recieveMovieData(){
+    this.subscription = this.dataService.movieCardData$.subscribe({
+      next: (data:Movie) => {
+        this.handleMovieDetails(data)
+      },
+      error: (err) => {
+        console.error(err)
+      }
+    })
+  }
     
   ngAfterViewInit(){
     this.fetchMovieList()
@@ -58,13 +82,9 @@ export class HomeComponent {
     })
   }
 
-  playMovie(){
-    this.moviePlaying = true;
-    this.containerMovie.nativeElement.play();
-    this.containerMovie.nativeElement.controls = true;
-    this.containerMovie.nativeElement.muted = false;
+ 
     
-  }
+  
 
   stopMovie(){
     this.moviePlaying = false;
@@ -110,13 +130,28 @@ export class HomeComponent {
     }
   }
 
-  handleMovieDetails($event: Movie){
-    this.movieGenre = $event.genre;
-    this.movieDescription = $event.description;
-    this.movieTitle = $event.title;
-    this.src = `http://127.0.0.1:8000/media/videos/${this.movieTitle}/480p/${this.movieTitle}_480p.m3u8`
+  handleMovieDetails(data: Movie){
+    this.movieGenre = data.genre;
+    this.movieDescription = data.description;
+    this.movieTitle = data.title;
+    this.src480p = `http://127.0.0.1:8000/media/videos/${this.movieTitle}/480p/${this.movieTitle}_480p.m3u8`
+    this.src720p = `http://127.0.0.1:8000/media/videos/${this.movieTitle}/720p/${this.movieTitle}_720p.m3u8`
     this.switchShowMovieDetails();
+  }
+
+  switchTo480p(){
+    this.mode720p = false;
+    this.mode480p = true;
     
+  }
+
+  switchTo720p(){
+    this.mode480p = false;
+    this.mode720p = true;
+  }
+
+  ngOnDestroy(){
+    this.subscription.unsubscribe();
   }
 
 }

@@ -6,15 +6,13 @@
     
         <div class="w-full infoContainer flex  h-full   transition-all ease-out absolute bg-transparent hover:bg-black z-20 hover:bg-opacity-50  justify-center items-center gap-5">
           
-            <div class="showInfo invisible mt-2 flex items-center justify-center gap-5">
-                <div (click)="openMovieContainer()" class="transition-all ease-in rounded-md hover:border-opacity-70  flex justify-center items-center gap-1 border-2 p-1 border-white hover:cursor-pointer">
-                    <img class="w-6" src="../../../../assets/images/info.png">
-                    <span class="text-white text-sm">More Info</span>
-                </div>
-                
-                <div class="transition-all ease-in rounded-md flex justify-center items-center gap-1 border-2 p-1 hover:border-opacity-70 border-white hover:cursor-pointer">
-                    <img class="w-6" src="../../../../assets/images/play.png">
-                    <span class="text-white text-sm">Play</span>
+            <div class="showInfo invisible mt-2 flex flex-col items-center justify-center gap-2">
+             
+                <span class="text-white">{{ title }}</span>
+                <div (click)="playVideo()" class="transition-all ease-in rounded-md flex justify-center items-center gap-1 border-2 p-1 hover:border-opacity-70 border-white hover:cursor-pointer">
+                    <img class="w-8" src="../../../../assets/images/play.png">
+                    
+                    <span class="text-white text-lg">Play</span>
                 </div>
            
             </div>

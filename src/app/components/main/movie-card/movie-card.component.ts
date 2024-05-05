@@ -1,5 +1,5 @@
-import { Component, ElementRef, Input, ViewChild, EventEmitter, Output } from '@angular/core';
-import { Movie } from '../../interfaces/MovieData.interface';
+import { Component, Input } from '@angular/core';
+import { ShareDataService } from '../../services/share-data.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -14,22 +14,25 @@ export class MovieCardComponent {
   
   @Input() customClass = '';
   @Input() index = '';
-  @Output() openMovie = new EventEmitter<Movie>();
+  playingVideo: boolean = false;
   @Input() title = '';
   @Input() description = '';
   @Input() imgSrc = '';
   @Input() genre: string = '';
 
+
+  constructor(private dataService: ShareDataService){}
   
-
- 
-
-  openMovieContainer(){
-    this.openMovie.emit({
+  playVideo(){
+    this.dataService.sendMovieCardData({
       title: this.title,
       description: this.description,
       genre: this.genre,
       imgSrc: '',
-    });
+    })
   }
+ 
+
+  
+
 }

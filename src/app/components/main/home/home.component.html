@@ -1,3 +1,4 @@
+<!-- Nav Bar -->
 <nav class="absolute top-0 w-full z-10">
     <div class="nav-bar bg-[#141414]  top-0 flex justify-between items-center w-full ">
     <div class="flex items-center gap-5">
@@ -5,9 +6,9 @@
         VIDEOFLIX
       </span>
 
-      <a class="text-white transition duration-150 ease-out hover:text-[#e5e5e5] hover:ease-in text-lg" href="#">Home</a>
-      <a class="text-white transition duration-150 ease-out hover:text-[#e5e5e5] hover:ease-in text-lg" href="#">Shows</a>
-      <a class="text-white transition duration-150 ease-out hover:text-[#e5e5e5] hover:ease-in text-lg" href="#">Movies</a>
+      <a class="text-white transition duration-150 ease-out hover:text-[#e5e5e5] hover:ease-in text-lg" >Home</a>
+      <a class="text-white transition duration-150 ease-out hover:text-[#e5e5e5] hover:ease-in text-lg" >Shows</a>
+      <a class="text-white transition duration-150 ease-out hover:text-[#e5e5e5] hover:ease-in text-lg" >Movies</a>
     </div>
 
     <div class="flex px-8">
@@ -16,7 +17,7 @@
     </div>
 </nav>
 
-
+<!-- Movie BG Video -->
 <section class="w-full h-screen flex justify-center items-center bg-[#141414] 
 ">
     <div class="bg-[#141414] w-full h-full flex justify-center items-center overflow-hidden">
@@ -25,29 +26,32 @@
             <app-video-player [cardMovie]="false" class="h-screen w-screen" [options]="{autoplay: true, fluid: true, controls: false, loop: true, sources: [{ src: 'http://127.0.0.1:8000/media/videos/finance/finance.mp4', type: 'video/mp4' }]}"></app-video-player>
     </div>
 
+    <!-- Watch List Container -->
     <div class="w-full flex flex-col bottom-4 h-[30%] absolute gap-2 ">
         <span class="text-white text-xl p-3 px-5 ">Watch List:</span>
        
 
         <div class="relative flex h-full w-full">
 
+            <!-- Left Scrolling Arrow -->
             <div (click)="scrollLeft()" class="arrow-left    w-[3%] min-h-[200px] max-h-[200px] flex items-center justify-center bg-transparent   cursor-pointer">
                 <img src="../../../../assets/images/arrow_home_left.png">
             </div>
             
+            <!-- Movie Cards -->
         <div #movieListContainer class="movie-list flex gap-4 h-full w-full overflow-hidden ">
 
          @for(movie of movieList; track $index; let last = $last){
 
             @if(last){
-                <app-movie-card [imgSrc]="movie.imgSrc!"   [genre]="movie.genre" [description]="movie.description" [title]="movie.title"  (openMovie)="handleMovieDetails($event)" customClass=""
+                <app-movie-card [imgSrc]="movie.imgSrc!"   [genre]="movie.genre" [description]="movie.description" [title]="movie.title"    customClass=""
                 >
                      
                     
                 </app-movie-card>
             }
             @else{
-                <app-movie-card [imgSrc]="movie.imgSrc!"  [genre]="movie.genre" [description]="movie.description" [title]="movie.title" (openMovie)="handleMovieDetails($event)" customClass="hover:mx-12"
+                <app-movie-card [imgSrc]="movie.imgSrc!"  [genre]="movie.genre" [description]="movie.description" [title]="movie.title" customClass="hover:mx-12"
                 >
                      
                     <img movieCardImage class="rounded-lg w-full h-full" src="">
@@ -59,7 +63,7 @@
 
         </div>
 
-        
+        <!-- Right Scrolling Arrow -->
 
         <div (click)="scrollRight()" class="arrow-right     w-[3%] min-h-[200px] max-h-[200px] flex items-center justify-center bg-transparent  cursor-pointer">
             <img src="../../../../assets/images/arrow_home_right.png">
@@ -69,7 +73,7 @@
     </div>
     </div>
 
-       
+            <!-- Movie Details Container  -->
             <div #bgCardContainer [class]="showMovieDetails ? 'visible' : 'hidden'" class=" flex backdrop-blur-sm absolute w-screen h-screen justify-center items-center transition-all ease-in overflow-hidden">
 
                 <div #cardContainer class="bg-[#141414] mt-5 z-50 duration-150 w-[35%]  h-[85%] rounded-lg  bg-opacity-80 flex flex-col p-10 drop-shadow-lg">
@@ -77,8 +81,19 @@
                         <img class="w-8" src="../../../../assets/images/x.svg"> 
                     </div>
                    <div class=" video-preview w-full relative h-[50%] mt-5">
+                    <div class="absolute right-0 z-20 flex gap-4">
+                    <button (click)="switchTo480p()" class="bg-white rounded-sm p-2 px-5">480p</button>
+                    <button (click)="switchTo720p()" class="bg-white rounded-sm p-2 px-5">720p</button>
+                    </div>
+                    
                     @if(showMovieDetails){
-                        <app-video-player [movieTitle]="movieTitle" [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: false, controls: true, sources: [{ src: src, type: 'application/x-mpegURL' }]}"></app-video-player>
+                        @if(this.mode480p){
+                            <app-video-player [movieTitle]="movieTitle" [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: false, controls: true, sources: [{ src: src480p, type: 'application/x-mpegURL' }]}"></app-video-player>
+                        }
+                        @else if(this.mode720p){
+                            <app-video-player [movieTitle]="movieTitle" [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: false, controls: true, sources: [{ src: src720p, type: 'application/x-mpegURL' }]}"></app-video-player>
+                        }
+                        
                     }
                    
                    </div>
