@@ -92,7 +92,6 @@ export class HomeComponent {
         if(localStorage){
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
-          console.log(resp)
         }
        
         this.router.navigateByUrl('');
