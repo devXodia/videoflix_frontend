@@ -11,7 +11,7 @@ export class MovieService {
 
 
   getMovieList(){
-    const url = 'http://127.0.0.1:8000/videos'
+    const url = 'https://alen-alduk.developerakademie.org/videos'
 
     const httpOptions = {
       headers: new HttpHeaders({

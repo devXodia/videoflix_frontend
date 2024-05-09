@@ -16,13 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   userToken: string = '';
-  private registerUrl = 'http://127.0.0.1:8000/register/';
-  private verifyUrl = `http://127.0.0.1:8000/verify-email/`;
-  private loginUrl = 'http://127.0.0.1:8000/login';
-  private passwordResetUrl = 'http://127.0.0.1:8000/password-reset'
-  private setPasswordUrl = 'http://127.0.0.1:8000/set-password'
-  private refreshTokenUrl = 'http://127.0.0.1:8000/token/refresh/'
-  private logoutUrl = 'http://127.0.0.1:8000/logout/'
+  private baseUrl = 'https://alen-alduk.developerakademie.org/'
 
   registerUser(fullName: string, email: string, pwd1: string): Observable<any> {
     const data: RegisterForm = {
@@ -32,13 +26,13 @@ export class AuthService {
       password: pwd1,
     };
 
-    return this.http.post<DjangoResponse>(this.registerUrl, data);
+    return this.http.post<DjangoResponse>(`${this.baseUrl + '/register/'}`, data);
   }
 
   refreshJWT(){
     const token = localStorage.getItem('refresh_token');
 
-    return this.http.post<DjangoResponse>(this.refreshTokenUrl, {refresh: token})
+    return this.http.post<DjangoResponse>(`${this.baseUrl + 'token/refresh/'}`, {refresh: token})
   }
 
   verifyUser(token: string) {
@@ -46,7 +40,7 @@ export class AuthService {
       token: token,
     };
 
-    return this.http.post<DjangoResponse>(this.verifyUrl, data);
+    return this.http.post<DjangoResponse>(`${this.baseUrl + 'verify-email/'}`, data);
   }
 
   loginUser(email: string, password: string) {
@@ -55,7 +49,7 @@ export class AuthService {
       password: password,
     };
 
-    return this.http.post<DjangoResponse>(this.loginUrl, data);
+    return this.http.post<DjangoResponse>(`${this.baseUrl + 'login'}`, data);
   }
 
   logoutUser(){
@@ -65,17 +59,20 @@ export class AuthService {
         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
       })
     };
-
-
-    return this.http.post<DjangoResponse>(this.logoutUrl, {}, httpOptions)
+    const data = {
+      'refresh_token': localStorage.getItem('refresh_token')
+    }
+  
+    return this.http.post<DjangoResponse>(`${this.baseUrl + 'logout/'}`, data, httpOptions)
   }
+  
 
   sendPasswordResetLink(email: string){
     const data: PasswordResetMail = {
       email: email
     };
 
-    return this.http.post<DjangoResponse>(this.passwordResetUrl, data);
+    return this.http.post<DjangoResponse>(`${this.baseUrl + 'password-reset'}`, data);
   }
 
   setNewPassword(token: string, password: string){
@@ -84,6 +81,6 @@ export class AuthService {
       password: password
     }
 
-    return this.http.post<DjangoResponse>(this.setPasswordUrl, data)
+    return this.http.post<DjangoResponse>(`${this.baseUrl + 'set-password'}`, data)
   }
 }
