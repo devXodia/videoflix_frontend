@@ -8,7 +8,7 @@
   </span>
 
   <div
-    class="reset-container flex flex-col h-[90%] w-[35%] bg-black bg-opacity-50 items-center p-8 drop-shadow-2xl rounded-2xl relative"
+    class="reset-container flex flex-col h-[90%] w-[35%] bg-black bg-opacity-50 items-center p-8 drop-shadow-2xl rounded-2xl relative max-sm:w-[80%] max-sm:h-[70%] max-sm:p-2 max-lg:w-[70%] max-lg:h-[80%] max-lg:p-2 max-xl:w-[60%] max-xl:h-[80%]"
   >
     <div
       routerLink="/"
@@ -18,7 +18,7 @@
     </div>
 
     <h2
-      class="sign-in-text text-center text-4xl text-white mt-40 font-medium w-[80%]"
+      class="sign-in-text text-center text-4xl text-white mt-40 font-medium w-[80%] max-sm:text-xl"
     >
       @if(loading){ Verifiying your Email... } @else if(!loading &&
       verifySuccess){ Your Account is verified! } @else { We could'nt verify
@@ -29,12 +29,12 @@
     <div class="spinner mt-20"></div>
     } @else if(verifySuccess){
     <img class="mt-20" src="../../../../assets/images/check.png" />
-    <p class="text-xl text-white text-center mt-20 font-medium w-[80%]">
+    <p class="text-xl text-white text-center mt-20 font-medium w-[80%] max-sm:mt-10">
       You are going to be redirected to the Homepage in 5 Seconds...
     </p>
     } @else {
     <img class="mt-20" src="../../../../assets/images/error.png" />
-    <h3 class="text-xl text-white text-center mt-20 font-medium w-[80%]">
+    <h3 class="text-xl text-white text-center mt-20 font-medium w-[80%] max-sm:mt-10">
       Please contact the Site Administrator for further assistance!
     </h3>
     }
