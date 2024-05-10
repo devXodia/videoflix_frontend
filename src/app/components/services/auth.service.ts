@@ -16,6 +16,7 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   userToken: string = '';
+  public loggedIn : boolean = false;
   private baseUrl = 'https://alen-alduk.developerakademie.org/'
 
   registerUser(fullName: string, email: string, pwd1: string): Observable<any> {

@@ -47,6 +47,7 @@ export class HomeComponent {
   subscription!: Subscription;
   mode480p: boolean = false;
   mode720p: boolean = true;
+  authenticated: boolean = this.auth.loggedIn;
 
   constructor(private renderer: Renderer2, private movie: MovieService, private dataService: ShareDataService, private auth: AuthService, private router: Router){}
 
@@ -94,7 +95,7 @@ export class HomeComponent {
           localStorage.removeItem('access_token');
           localStorage.removeItem('refresh_token');
         }
-       
+        this.auth.loggedIn = false;
         this.router.navigateByUrl('');
       },
       error: (err) => {

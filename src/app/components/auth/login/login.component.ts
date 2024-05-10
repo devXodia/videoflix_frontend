@@ -27,6 +27,7 @@ export class LoginComponent {
           localStorage.setItem('access_token', resp.access);
           localStorage.setItem('refresh_token', resp.refresh);
         }
+        this.auth.loggedIn = true;
         this.router.navigateByUrl('/home')
       },
       error: (err: HttpErrorResponse) => {
