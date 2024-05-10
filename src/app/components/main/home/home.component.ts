@@ -9,7 +9,8 @@ import { ShareDataService } from '../../services/share-data.service';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-
+import 'video.js/dist/video-js.css';
+import videojs from 'video.js';
 
 
 
@@ -122,7 +123,7 @@ export class HomeComponent {
       next: (resp: Movie[]) => {
       this.movieList = resp;
       this.movieList.forEach((movie: Movie) => {
-        movie.imgSrc = `http://127.0.0.1:8000/media/videos/${movie.title}/poster.jpg`
+        movie.imgSrc = `https://alen-alduk.developerakademie.org/media/videos/${movie.title.toLowerCase()}/poster.jpg`
       });
       },
       error: (err: HttpErrorResponse) => {
@@ -162,8 +163,9 @@ export class HomeComponent {
     this.movieGenre = data.genre;
     this.movieDescription = data.description;
     this.movieTitle = data.title;
-    this.src480p = `http://127.0.0.1:8000/media/videos/${this.movieTitle}/480p/${this.movieTitle}_480p.m3u8`
-    this.src720p = `http://127.0.0.1:8000/media/videos/${this.movieTitle}/720p/${this.movieTitle}_720p.m3u8`
+    this.movieTitle = this.movieTitle
+    this.src480p = `https://alen-alduk.developerakademie.org/media/videos/${this.movieTitle.toLowerCase()}/480p/${this.movieTitle.toLowerCase()}_480p.m3u8`
+    this.src720p = `https://alen-alduk.developerakademie.org/media/videos/${this.movieTitle.toLowerCase()}/720p/${this.movieTitle.toLowerCase()}_720p.m3u8`
     this.switchShowMovieDetails();
   }
 

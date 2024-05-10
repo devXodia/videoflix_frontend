@@ -23,7 +23,7 @@
     <div class="bg-[#141414] w-full h-full flex justify-center items-center overflow-hidden">
         <div class="w-full h-full flex justify-center items-center ">
            
-            <app-video-player [cardMovie]="false" class="h-screen w-screen" [options]="{autoplay: true, fluid: true, controls: false, loop: true, sources: [{ src: 'http://127.0.0.1:8000/media/videos/finance/finance.mp4', type: 'video/mp4' }]}"></app-video-player>
+            <app-video-player [cardMovie]="false" class="h-screen w-screen" [options]="{autoplay: true, fluid: true, controls: false, loop: true, sources: [{ src: 'https://alen-alduk.developerakademie.org/media/videos/finance/finance.mp4', type: 'video/mp4' }]}"></app-video-player>
     </div>
 
     <!-- Watch List Container -->
@@ -88,10 +88,10 @@
                     
                     @if(showMovieDetails){
                         @if(this.mode480p){
-                            <app-video-player [movieTitle]="movieTitle" [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: false, controls: true, sources: [{ src: src480p, type: 'application/x-mpegURL' }]}"></app-video-player>
+                            <app-video-player [movieTitle]="movieTitle" [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: true, controls: true, sources: [{ src: src480p, type: 'application/x-mpegURL' }]}"></app-video-player>
                         }
                         @else if(this.mode720p){
-                            <app-video-player [movieTitle]="movieTitle" [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: false, controls: true, sources: [{ src: src720p, type: 'application/x-mpegURL' }]}"></app-video-player>
+                            <app-video-player [movieTitle]="movieTitle" [cardMovie]="true" class="h-screen w-screen" [options]="{ autoplay: true, controls: true, sources: [{ src: src720p, type: 'application/x-mpegURL' }]}"></app-video-player>
                         }
                         
                     }
